@@ -6,8 +6,8 @@ import userManager from "./routers/user_manager.js";
 
 //app init 
 const app = express();
-const PORT = process.env.port || 5000;
-const URI = "mongodb+srv://hoanghoang262:hoang2622002@cluster0.necqb.mongodb.net/NWP_Project?retryWrites=true&w=majority";
+const PORT = process.env.port || 5000; //port initialize
+const URI = "mongodb+srv://hoanghoang262:hoang2622002@cluster0.necqb.mongodb.net/NWP_Project?retryWrites=true&w=majority";  //database url
 
 //add middleware 
 app.use(bodyParser.json());
