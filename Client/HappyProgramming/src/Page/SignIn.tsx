@@ -8,17 +8,33 @@ import {
   Container,
   FormControlLabel,
   Checkbox,
+  InputAdornment,
+  IconButton,
 } from '@mui/material';
 import { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import ActionBar from '../Component/ActionBar'
+import { BiShow, BiHide } from "react-icons/bi";
+import {checkSignIn} from "../Api/Authentication"
+ 
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [hidePassword, setHidePassword] = useState(true);
+  const [data,setData] = useState(); 
 
+  //submid sign in
   const submit = () =>{
-    
+    checkSignIn(email,password,(inputData:any) => {
+      setData(inputData);
+      if(data == null){
+
+      }else{
+
+      }
+    });
   }
+
 
   return (
     <Box m={3}>
@@ -56,12 +72,22 @@ export default function SignIn() {
           </Typography>
           <Stack spacing={2}>
             <TextField onChange={(e) => setEmail(e.target.value)} variant="outlined" label="Email" fullWidth />
-            <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Password" type="password" fullWidth />
+            <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Password" type={hidePassword ? "password" : "text"} fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setHidePassword(!hidePassword)}>
+                      {hidePassword ? <BiHide size={25} /> : <BiShow color='#0089ff' size={25} />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
             <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-              // sx={{ 'a, span': { fontSize: 15 } }}
+            // sx={{ 'a, span': { fontSize: 15 } }}
             >
               <FormControlLabel control={<Checkbox size="small" />} label="Remember me" />
               <Link component={RouterLink} to="/forgot-password" sx={{ textDecoration: 'none' }}>

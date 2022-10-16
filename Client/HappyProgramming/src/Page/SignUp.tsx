@@ -1,8 +1,21 @@
-import { Box, Button, Container, Link, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Container, IconButton, InputAdornment, Link, Stack, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { BiHide, BiShow } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import ActionBar from '../Component/ActionBar';
 
 export default function SignUp() {
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName,setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [hidePassword, setHidePassword] = useState(true);
+  const [hideCPassword, setHideCPassword] = useState(true);
+
+  const submit = () => {
+
+  }
+
   return (
     <Box m={3}>
       <ActionBar>
@@ -30,15 +43,35 @@ export default function SignUp() {
             Learn new things, anytime you want.
           </Typography>
           <Stack spacing={2}>
-            <TextField variant="outlined" label="Email" fullWidth />
+            <TextField onChange={(e) => setEmail(e.target.value)} variant="outlined" label="Email" fullWidth />
             <Box display="flex" sx={{ gap: 1 }}>
-              <TextField variant="outlined" label="First name" fullWidth />
-              <TextField variant="outlined" label="Last name" fullWidth />
+              <TextField onChange={(e) => setFirstName(e.target.value)} variant="outlined" label="First name" fullWidth />
+              <TextField onChange={(e) => setLastName(e.target.value)} variant="outlined" label="Last name" fullWidth />
             </Box>
-            <TextField variant="outlined" label="Password" type="password" fullWidth />
-            <TextField variant="outlined" label="Confirm password" type="password" fullWidth />
+            <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Password" type={hidePassword ? "password" : "text"} fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setHidePassword(!hidePassword)}>
+                      {hidePassword ? <BiHide size={25} /> : <BiShow color='#0089ff' size={25} />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Confirm Password" type={hideCPassword ? "password" : "text"} fullWidth
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => setHideCPassword(!hideCPassword)}>
+                      {hideCPassword ? <BiHide size={25} /> : <BiShow color='#0089ff' size={25} />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
           </Stack>
-          <Button variant="contained" sx={{ height: 50 }}>
+          <Button onClick={() => submit()} variant="contained" sx={{ height: 50 }}>
             Sign Up
           </Button>
         </Stack>
