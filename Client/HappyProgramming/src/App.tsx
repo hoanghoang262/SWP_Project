@@ -4,20 +4,28 @@ import HomePage from './Page/HomePage'
 import SignUp from "./Page/SignUp"
 import SignIn from "./Page/SignIn"
 import ForgotPassword from './Page/ForgotPassword'
+import About from './Page/About'
+import Contact from './Page/Contact'
+import Contact2 from './Page/ContactPage'
+import Profile from './Page/Profile'
+import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
+import Narbar from './Component/Narbar'
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element = {<HomePage/>}/> {/* home page */}
-        <Route path='/signUp' element={<SignUp/>}/> {/* sign up page */}
-        <Route path='/signIn' element={<SignIn/>}/> {/* sign ip page */}
-        <Route path='/forgot-password' element={<ForgotPassword/>}/> {/*  page */}
-        <Route path="userProfile"/>
-        <Route path='/about'/>{/* about page show up general infomatio nabout web */}
-        <Route path='contact'/>{/* page to contact with admin */}
-        <Route path='/coursePage'/> {/* page show up list of course */}
-      </Routes>
-    </BrowserRouter>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<HomePage />} /> {/* home page */}
+          <Route path='/signUp' element={<SignUp />} /> {/* sign up page */}
+          <Route path='/signIn' element={<SignIn />} /> {/* sign ip page */}
+          <Route path='/forgot-password' element={<ForgotPassword />} /> {/*  page */}
+          <Route path='/about' element={<><Narbar/><About/></>} />{/* about page show up general infomatio nabout web */}
+          <Route path='/contact' element={<Contact2 />} />{/* page to contact with admin */}
+          <Route path='/userProfile' element={<><Narbar/><Profile/></>} />{/* */}
+          <Route path='/coursePage' /> {/* page show up list of course */}
+        </Routes>
+      </BrowserRouter>
+    </RecoilRoot>
   )
 }
 

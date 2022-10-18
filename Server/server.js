@@ -3,23 +3,26 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import userManager from "./routers/user_manager.js";
+import Authentication from "./routers/user_authentication.js";
 
 //app init 
 const app = express();
-const PORT = process.env.port || 5000; //port initialize
-const URI = "mongodb+srv://hoanghoang262:hoang2622002@cluster0.necqb.mongodb.net/NWP_Project?retryWrites=true&w=majority";  //database url
+const PORT = process.env.port || 5000;
+const URI = "mongodb+srv://hoanghoang262:hoang2622002@cluster0.necqb.mongodb.net/NWP_Project?retryWrites=true&w=majority";
 
 //add middleware 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+}));
 
 //add mongoose database
 mongoose.connect(URI,{ useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => {
         console.log("Connected to database");
         app.listen(PORT,()=>{
-            console.log(`Server is running on PORT ${PORT}`);
+            console.log(`Server is running on http://localhost:${PORT}`);
         })
     })
     .catch(err => {
@@ -28,6 +31,7 @@ mongoose.connect(URI,{ useNewUrlParser: true, useUnifiedTopology: true})
 
 //add router 
 app.use("/user_manager",userManager);
+app.use("/user_authentication",Authentication);
 
 app.get('/' , (req,res) =>{
     res.send('SUCCESS');

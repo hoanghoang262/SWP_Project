@@ -2,7 +2,7 @@
 
 import { userInfoModel } from "../model/userInfoModel.js"
 
-// get medthod (read)
+// get medthod 
 export const getMethod = async (req,res) =>{
     try{
         const userInfos = await userInfoModel.find();
@@ -14,11 +14,10 @@ export const getMethod = async (req,res) =>{
     }
 }
 
-//post method (create)
+//post method 
 export const postMethod = async (req,res) =>{
     try{
         const newUserInfo = req.body;
-
         const userInfo = new userInfoModel(newUserInfo);
         await userInfo.save();
         res.status(200).json(userInfo);
@@ -29,7 +28,7 @@ export const postMethod = async (req,res) =>{
     }
 }
 
-//update method (update)
+//update method
 export const updateMethod = async (req,res) =>{
     try{
         const updateData = req.body;
@@ -46,7 +45,7 @@ export const updateMethod = async (req,res) =>{
     }
 } 
 
-//delete method (delete)
+//delete method
 export const deleteMethod = async (req,res) => {
     try{
         const deleteData = req.body;

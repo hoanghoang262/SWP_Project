@@ -1,12 +1,15 @@
-//model for user data in mongodb 
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
-    userName: {
+    firstName: {
         type: String,
         default: 'Anonymous',
     },
-    userBirth: {
+    lastName:{
+        type: String,
+        default: 'Anonymous',
+    },
+    birth: {
         type: Date,       
     },
     email: {

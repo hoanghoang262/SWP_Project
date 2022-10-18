@@ -11,30 +11,44 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ActionBar from '../Component/ActionBar'
 import { BiShow, BiHide } from "react-icons/bi";
 import {checkSignIn} from "../Api/Authentication"
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { userInfoState } from '../Recoil/Atom';
  
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
-  const [data,setData] = useState(); 
-
+  const [submitState,setSubmitState] = useState(false);
+  const [userInfo,setUserInfo] = useRecoilState(userInfoState);
+  const navigate = useNavigate();
   //submid sign in
   const submit = () =>{
     checkSignIn(email,password,(inputData:any) => {
-      setData(inputData);
-      if(data == null){
-
+      setUserInfo(inputData);
+      if(userInfo == null){
+        console.log("Sign in deline");
       }else{
-
+        console.log("Sign in success");
       }
+      navigate("/");
     });
   }
 
+
+  useEffect(() =>{
+    if(email != "" && password != ""){
+      setSubmitState(true)
+    }else{
+      setSubmitState(false)
+    }
+  },[email,password])
+
+  
 
   return (
     <Box m={3}>
@@ -95,7 +109,7 @@ export default function SignIn() {
               </Link>
             </Box>
           </Stack>
-          <Button onClick={submit} variant="contained" sx={{ height: 50 }}>
+          <Button disabled={submitState ? false : true} onClick={submit} variant="contained" sx={{ height: 50 }}>
             Sign In
           </Button>
         </Stack>

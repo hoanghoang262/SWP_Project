@@ -1,20 +1,57 @@
 import { Box, Button, Container, IconButton, InputAdornment, Link, Stack, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BiHide, BiShow } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import ActionBar from '../Component/ActionBar';
+import { signUp } from '../Api/Authentication';
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
-  const [lastName,setLastName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
+  const [rePassword, setRePassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
   const [hideCPassword, setHideCPassword] = useState(true);
+  const [submitState, setSubmitState] = useState(false);
+  const [checkP, setCheckP] = useState(false);
 
+
+  //submit button
   const submit = () => {
-
+    const data = {
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      password: password,
+    }
+    signUp(data, (res:any) => {
+      if (res == null) {
+        console.log("Sign up deline");
+      } else {
+        console.log("sign up success ", res)
+      }
+    });
   }
+
+  //set submit button disable state
+  useEffect(() => {
+    if (email != "" && password != "" && firstName != "" && lastName != "" && checkP == true) {
+      setSubmitState(true)
+    } else {
+      setSubmitState(false)
+    }
+  }, [email, password, firstName, lastName,checkP])
+
+  //check password and repassword
+  useEffect(() => {
+    if (password != rePassword) {
+      setCheckP(false)
+    } else {
+      setCheckP(true)
+    }
+  },[password,rePassword])
+
 
   return (
     <Box m={3}>
@@ -59,7 +96,7 @@ export default function SignUp() {
                 ),
               }}
             />
-            <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Confirm Password" type={hideCPassword ? "password" : "text"} fullWidth
+            <TextField onChange={(e) => setRePassword(e.target.value)} variant="outlined" label="Confirm Password" type={hideCPassword ? "password" : "text"} fullWidth
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
@@ -71,7 +108,7 @@ export default function SignUp() {
               }}
             />
           </Stack>
-          <Button onClick={() => submit()} variant="contained" sx={{ height: 50 }}>
+          <Button disabled={submitState ? false : true} onClick={() => submit()} variant="contained" sx={{ height: 50 }}>
             Sign Up
           </Button>
         </Stack>
