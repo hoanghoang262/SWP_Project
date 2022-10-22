@@ -13,10 +13,16 @@ const schema = new mongoose.Schema({
         type: Date,       
     },
     email: {
-        type: String, 
+        type: String,
+        require:true 
     },
     phoneNumber:{
         type: String,
+    },address:{
+        type: String
+    },
+    password:{
+        type: String
     }
 },{timestamps: true})
 

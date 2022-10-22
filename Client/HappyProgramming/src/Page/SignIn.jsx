@@ -11,7 +11,7 @@ import {
   InputAdornment,
   IconButton,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ActionBar from '../Component/ActionBar'
 import { BiShow, BiHide } from "react-icons/bi";
@@ -21,6 +21,7 @@ import { userInfoState } from '../Recoil/Atom';
  
 export default function SignIn() {
   const [email, setEmail] = useState('');
+  const [emailState, setEmailState] = useState(true);
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
   const [submitState,setSubmitState] = useState(false);
@@ -28,7 +29,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   //submid sign in
   const submit = () =>{
-    checkSignIn(email,password,(inputData:any) => {
+    checkSignIn(email,password,(inputData) => {
       setUserInfo(inputData);
       if(userInfo == null){
         console.log("Sign in deline");
@@ -39,7 +40,7 @@ export default function SignIn() {
     });
   }
 
-
+  //check submit state
   useEffect(() =>{
     if(email != "" && password != ""){
       setSubmitState(true)
@@ -48,6 +49,14 @@ export default function SignIn() {
     }
   },[email,password])
 
+  //set email state message
+  const onBlurEmail = (e) => {
+    if(e.target.value == ""){
+      setEmailState(false);
+    }else{
+      setEmailState(true);
+    }
+  }
   
 
   return (
@@ -85,7 +94,17 @@ export default function SignIn() {
             Enter your details below.
           </Typography>
           <Stack spacing={2}>
-            <TextField onChange={(e) => setEmail(e.target.value)} variant="outlined" label="Email" fullWidth />
+            <TextField onBlur={(e) => onBlurEmail(e)} 
+                       onFocus={() => {setEmailState(true)}}
+                       error={emailState ? false : true} 
+                       helperText={emailState ? "" : "Email can not empty"} 
+                       onChange={(e) => setEmail(e.target.value)} 
+                       variant="outlined" label="Email" fullWidth autoFocus
+                       inputProps={{
+                        form: {
+                          autocomplete: 'off',
+                        },
+                      }}/>
             <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Password" type={hidePassword ? "password" : "text"} fullWidth
               InputProps={{
                 endAdornment: (

@@ -20,6 +20,7 @@ const Narbar = () => {
     }
     const handleLogoutButton = () =>{
         setUserInfo([]);
+        naviga("/");
         handleClose();
     }
 
@@ -31,6 +32,7 @@ const Narbar = () => {
         <Avatar src='https://static.vecteezy.com/system/resources/previews/002/002/403/large_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg' sx={{ cursor: "pointer", bgcolor: deepOrange[500], width: "45px", height: "45px", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <p className='text-2xl' >N</p>
         </Avatar>
+        //drop manu
     const dropMenu = <>
         <div>
             <Button

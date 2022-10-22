@@ -6,7 +6,6 @@ import SignIn from "./Page/SignIn"
 import ForgotPassword from './Page/ForgotPassword'
 import About from './Page/About'
 import Contact from './Page/Contact'
-import Contact2 from './Page/ContactPage'
 import Profile from './Page/Profile'
 import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
 import Narbar from './Component/Narbar'
@@ -20,7 +19,7 @@ function App() {
           <Route path='/signIn' element={<SignIn />} /> {/* sign ip page */}
           <Route path='/forgot-password' element={<ForgotPassword />} /> {/*  page */}
           <Route path='/about' element={<><Narbar/><About/></>} />{/* about page show up general infomatio nabout web */}
-          <Route path='/contact' element={<Contact2 />} />{/* page to contact with admin */}
+          <Route path='/contact' element={<><Narbar/><Contact/></>} />{/* page to contact with admin */}
           <Route path='/userProfile' element={<><Narbar/><Profile/></>} />{/* */}
           <Route path='/coursePage' /> {/* page show up list of course */}
         </Routes>

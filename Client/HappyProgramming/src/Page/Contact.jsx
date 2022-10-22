@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import Iconify from '../Component/Iconify';
 
-function SectionTitle( display:any, title:any, subtitle:any, icon:any ) {
+function SectionTitle({ display, title, subtitle, icon }) {
   return (
     <Box display="flex" gap={1}>
       <Box width="24px">{icon}</Box>
