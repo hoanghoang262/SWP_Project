@@ -5,6 +5,7 @@ import { TextField, Button, Box, Grid, Link, Stack, Typography } from '@mui/mate
 import { Link as RouterLink } from 'react-router-dom';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import Iconify from '../Component/Iconify';
+import { useState } from 'react'
 
 function SectionTitle({ display, title, subtitle, icon }) {
   return (
@@ -26,6 +27,13 @@ function SectionTitle({ display, title, subtitle, icon }) {
 }
 
 export default function Contact() {
+  const [emailState, setEmailState] = useState(true)
+  const [nameState, setNameState] = useState(true)
+  const [phoneState, setPhoneState] = useState(true)
+  const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+
   const onFacebookIconClick = () => {
     console.log('Facebook icon clicked');
   };
@@ -41,6 +49,46 @@ export default function Contact() {
   const onYoutubeIconClick = () => {
     console.log('Youtube icon clicked');
   };
+
+  const checkPhone= (e) => {
+    const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    alphabet.forEach(element => {
+      if(e.target.value.includes(element)){
+         setPhoneState(false)
+      }
+    });
+  }
+
+  const phoneNumberChange = (e) => {
+    setPhone(e.target.value)
+
+    
+  }
+
+  const onBlurEmail = (e) => {
+    if(e.target.value == ""){
+      setEmailState(false)
+    }else{
+      setEmailState(true)
+    }
+  }
+
+  const onBlurName = (e) =>{
+    if(e.target.value == ""){
+      setNameState(false)
+    }else{
+      setNameState(true)
+    }
+  }
+
+  const onBlurPhone = (e) =>{
+    if(e.target.value == ""){
+      setPhoneState(false)
+    }else{
+      setPhoneState(true)
+    }
+    checkPhone(e)
+  }
 
   return (
     <>
@@ -128,9 +176,21 @@ export default function Contact() {
                 </Typography>
               </Stack>
               <Stack spacing={3}>
-                <TextField variant="outlined" label="Name" />
-                <TextField variant="outlined" label="Email" />
-                <TextField variant="outlined" label="Phone number" />
+                <TextField variant="outlined" label="Name"
+                onChange={(e)=>setName(e.target.value)}
+                onBlur={onBlurName}
+                error={nameState? false : true}
+                helperText={nameState? "":"Name can not be empty"} />
+                <TextField variant="outlined" label="Email" 
+                onChange={(e)=>setEmail(e.target.value)}
+                onBlur={onBlurEmail}
+                error={emailState? false : true}
+                helperText={emailState? "":"Email can not be empty"}/>
+                <TextField variant="outlined" label="Phone number" 
+                onChange={(e)=>phoneNumberChange(e)}
+                onBlur={onBlurPhone}
+                error={phoneState? false:true}
+                helperText={phoneState? "":"phone number can not be empty or have alphabet"}/>
                 <TextField variant="outlined" label="How can we help?" multiline rows={4} />
               </Stack>
               <Button variant="contained" fullWidth sx={{ height: '50px' }}>
