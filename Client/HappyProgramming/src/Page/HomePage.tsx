@@ -1,5 +1,6 @@
 import React from "react";
 import Narbar from "../Component/Narbar";
+import { emailValidation } from "../Component/Validation";
 
 function HomePage() {
     return (
