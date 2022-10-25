@@ -1,8 +1,23 @@
 import { Box, Button, Container, Link, Stack, TextField, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import ActionBar from '../Component/ActionBar';
+import { useState } from 'react'
+import React, { FocusEvent } from 'react';
 
 export default function ForgotPassword() {
+  
+  const [emailState, setEmailState] = useState(true)
+  const [email, setEmail] = useState("")
+  
+  const onBlurEmail = (e: FocusEvent<HTMLInputElement>)=>{
+    if(e.target.value == ""){
+      setEmailState(false)
+    }
+    else{
+      setEmailState(true)
+    }
+  }
+
   return (
     <Box m={3}>
       <ActionBar>
@@ -30,7 +45,11 @@ export default function ForgotPassword() {
             Enter you email below.
           </Typography>
           <Stack spacing={2}>
-            <TextField variant="outlined" label="Email" fullWidth />
+            <TextField onChange={(e)=>setEmail(e.target.value)}
+            onBlur={onBlurEmail}
+            error={emailState? false:true}
+            helperText={emailState?"":"Email can not be empty"}
+             variant="outlined" label="Email" fullWidth />
           </Stack>
           <Button variant="contained" sx={{ height: 50 }}>
             Confirm

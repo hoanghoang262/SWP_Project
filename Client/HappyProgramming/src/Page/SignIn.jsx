@@ -23,6 +23,7 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [emailState, setEmailState] = useState(true);
   const [password, setPassword] = useState('');
+  const [passState, setPassState] = useState(true);
   const [hidePassword, setHidePassword] = useState(true);
   const [submitState,setSubmitState] = useState(false);
   const [userInfo,setUserInfo] = useRecoilState(userInfoState);
@@ -55,6 +56,14 @@ export default function SignIn() {
       setEmailState(false);
     }else{
       setEmailState(true);
+    }
+  }
+
+  const onBlurPassword = (e) => {
+    if(e.target.value == ""){
+      setPassState(false)
+    }else{
+      setPassState(true)
     }
   }
   
@@ -94,7 +103,7 @@ export default function SignIn() {
             Enter your details below.
           </Typography>
           <Stack spacing={2}>
-            <TextField onBlur={(e) => onBlurEmail(e)} 
+            <TextField onBlur={(e)=> onBlurEmail(e)} 
                        onFocus={() => {setEmailState(true)}}
                        error={emailState ? false : true} 
                        helperText={emailState ? "" : "Email can not empty"} 
@@ -106,6 +115,9 @@ export default function SignIn() {
                         },
                       }}/>
             <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Password" type={hidePassword ? "password" : "text"} fullWidth
+              onBlur={onBlurPassword}
+              error={passState ? false : true}
+              helperText={passState ? "" : "Password can not empty"}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
