@@ -3,7 +3,11 @@ import { useRecoilState } from 'recoil';
 import { userInfoState } from '../Recoil/Atom';
 
 export default function UserProfileForm() {
+  //global state contain userinfo
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+  const data = {
+    firstName : userInfo.firstName
+  }
   return (
     <Stack spacing={2} direction="column">
       <Box

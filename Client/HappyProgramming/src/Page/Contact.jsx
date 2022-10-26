@@ -206,7 +206,7 @@ export default function Contact() {
                 onChange={onChangeEmail}
                 onBlur={onBlurEmail}
                 error={emailState&&emailValidationState? false : true}
-                helperText={emailState? (emailValidationState? "":"Not an email"):"Email can not be empty"}/>
+                helperText={emailState? (emailValidationState? "":"email is not valid"):"Email can not be empty"}/>
                 <TextField variant="outlined" label="Phone number" 
                 onChange={(e)=>phoneNumberChange(e)}
                 onBlur={onBlurPhone}

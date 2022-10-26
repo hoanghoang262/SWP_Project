@@ -116,7 +116,7 @@ export default function SignIn() {
             <TextField onBlur={(e)=> onBlurEmail(e)} 
                        onFocus={() => {setEmailState(true)}}
                        error={emailState&&emailValidationState ? false : true} 
-                       helperText={emailState ? (emailValidationState? "":"Not an email") : "Email can not empty"} 
+                       helperText={emailState ? (emailValidationState? "":"email is not valid") : "Email can not empty"} 
                        onChange={onChangeEmail} 
                        variant="outlined" label="Email" fullWidth autoFocus
                        inputProps={{

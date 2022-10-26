@@ -81,7 +81,7 @@ const Narbar = () => {
             contact = <p className=' text-blue-500'>Contact</p>
             break;
         case "/service":
-            service = <p className=' text-blue-500'>services</p>
+            service = <p className=' text-blue-500'>Services</p>
             break;
        } 
     }
