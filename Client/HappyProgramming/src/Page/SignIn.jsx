@@ -18,6 +18,7 @@ import { BiShow, BiHide } from "react-icons/bi";
 import {checkSignIn} from "../Api/Authentication"
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userInfoState } from '../Recoil/Atom';
+import { emailValidation } from '../Component/Validation'
  
 export default function SignIn() {
   const [email, setEmail] = useState('');
@@ -27,6 +28,9 @@ export default function SignIn() {
   const [hidePassword, setHidePassword] = useState(true);
   const [submitState,setSubmitState] = useState(false);
   const [userInfo,setUserInfo] = useRecoilState(userInfoState);
+  const [emailValidationState, setEmailValidationState] = useState(true)
+
+
   const navigate = useNavigate();
   //submid sign in
   const submit = () =>{
@@ -67,6 +71,11 @@ export default function SignIn() {
       setPassState(true)
     }
   }
+
+  const onChangeEmail = (e) =>{
+    setEmail(e.target.value)
+    setEmailValidationState(emailValidation(e.target.value))
+  }
   
 
   return (
@@ -106,9 +115,9 @@ export default function SignIn() {
           <Stack spacing={2}>
             <TextField onBlur={(e)=> onBlurEmail(e)} 
                        onFocus={() => {setEmailState(true)}}
-                       error={emailState ? false : true} 
-                       helperText={emailState ? "" : "Email can not empty"} 
-                       onChange={(e) => setEmail(e.target.value)} 
+                       error={emailState&&emailValidationState ? false : true} 
+                       helperText={emailState ? (emailValidationState? "":"Not an email") : "Email can not empty"} 
+                       onChange={onChangeEmail} 
                        variant="outlined" label="Email" fullWidth autoFocus
                        inputProps={{
                         form: {

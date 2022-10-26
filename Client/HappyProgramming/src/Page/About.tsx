@@ -8,15 +8,15 @@ export default function About() {
           variant="h2"
           sx={{ color: 'white', fontSize: 20, fontWeight: 600 }}
         >
-          Happy Program
+          
         </Typography>
         <Box p={3} display="flex" justifyContent="center">
           <Box textAlign="center">
             <Typography variant="h5" sx={{ color: 'primary.light' }}>
-              The Happy Story
+              The Happy Program
             </Typography>
             <Typography sx={{ color: 'white' }}>
-              We know SEO. In fact, we wrote the blog on it.
+              Build upon the demand of closing the gap of knowledge.
             </Typography>
           </Box>
         </Box>
@@ -29,15 +29,12 @@ export default function About() {
       >
         <Typography
           variant="body1"
-          sx={{ width: '600px', textAlign: 'center' }}
+          sx={{ width: '500px', textAlign: 'center' }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum
+          We are a team of students come from FPT university.
+          This website is a project of our team with the target that
+          to create a site has fully functions of a foundation to be a
+          alternative way of communication between students, teachers and knowledge
         </Typography>
       </Box>
       <Container>
@@ -63,13 +60,10 @@ export default function About() {
               Our work station
             </Typography>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum
+              Do not have financial support from outsider, 
+              we mostly build this project by empty hands and ourself effort. 
+              Most of the time, we builded this project together at class or the library at school,
+              we also have meeting at home to work together
             </Typography>
           </Stack>
         </Box>
@@ -88,13 +82,10 @@ export default function About() {
               Our Founding
             </Typography>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum
+              Our team leader is Hoang, who work the most hard to get our team together
+              and finished this project in time, with the time he spend on us and this project
+              he's truly the mvp and a decent leader. Althrough sometimes we did have some argruments
+              but it all work out perfectly
             </Typography>
           </Stack>
           <Box

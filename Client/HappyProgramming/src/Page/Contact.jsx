@@ -5,7 +5,8 @@ import { TextField, Button, Box, Grid, Link, Stack, Typography } from '@mui/mate
 import { Link as RouterLink } from 'react-router-dom';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import Iconify from '../Component/Iconify';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { emailValidation } from '../Component/Validation'
 
 function SectionTitle({ display, title, subtitle, icon }) {
   return (
@@ -33,6 +34,20 @@ export default function Contact() {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
+  const [submitState, setSubmitState] = useState(false)
+  const [emailValidationState, setEmailValidationState] = useState(true)
+
+  //co the submit neu phone, name va email khong null
+  useEffect(()=>{
+    if(email!= ""&&phone!= ""&&name!= ""){
+      setSubmitState(true)
+    }
+    else{
+      setSubmitState(false)
+    }
+
+  }, [email, phone, name])
+
 
   const onFacebookIconClick = () => {
     console.log('Facebook icon clicked');
@@ -71,6 +86,7 @@ export default function Contact() {
     }else{
       setEmailState(true)
     }
+    
   }
 
   const onBlurName = (e) =>{
@@ -90,6 +106,11 @@ export default function Contact() {
     checkPhone(e)
   }
 
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value)
+    setEmailValidationState(emailValidation(e.target.value))
+  }
+
   return (
     <>
       <Grid container>
@@ -107,7 +128,7 @@ export default function Contact() {
                 fontWeight: 600,
               }}
             >
-              Happy Program
+              
             </Link>
             <Stack spacing={3} sx={{ flexGrow: 1, padding: 5 }}>
               <Typography variant="h4" color="grey.200" sx={{ fontWeight: 600 }}>
@@ -182,10 +203,10 @@ export default function Contact() {
                 error={nameState? false : true}
                 helperText={nameState? "":"Name can not be empty"} />
                 <TextField variant="outlined" label="Email" 
-                onChange={(e)=>setEmail(e.target.value)}
+                onChange={onChangeEmail}
                 onBlur={onBlurEmail}
-                error={emailState? false : true}
-                helperText={emailState? "":"Email can not be empty"}/>
+                error={emailState&&emailValidationState? false : true}
+                helperText={emailState? (emailValidationState? "":"Not an email"):"Email can not be empty"}/>
                 <TextField variant="outlined" label="Phone number" 
                 onChange={(e)=>phoneNumberChange(e)}
                 onBlur={onBlurPhone}
@@ -193,7 +214,7 @@ export default function Contact() {
                 helperText={phoneState? "":"phone number can not be empty or have alphabet"}/>
                 <TextField variant="outlined" label="How can we help?" multiline rows={4} />
               </Stack>
-              <Button variant="contained" fullWidth sx={{ height: '50px' }}>
+              <Button variant="contained" disabled={submitState? false:true} fullWidth sx={{ height: '50px' }}>
                 Get started
               </Button>
             </Stack>

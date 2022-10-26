@@ -22,6 +22,7 @@ function App() {
           <Route path='/contact' element={<><Narbar/><Contact/></>} />{/* page to contact with admin */}
           <Route path='/userProfile' element={<><Narbar/><Profile/></>} />{/* */}
           <Route path='/coursePage' /> {/* page show up list of course */}
+          <Route path='/service' element={<><Narbar/></>}/>{/*service*/}
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

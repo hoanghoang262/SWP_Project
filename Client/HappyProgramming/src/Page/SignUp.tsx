@@ -5,6 +5,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import ActionBar from '../Component/ActionBar';
 import { signUp } from '../Api/Authentication';
 import React, { FocusEvent } from 'react';
+import { emailValidation } from '../Component/Validation'
 
 export default function SignUp() {
   const [email, setEmail] = useState('');
@@ -22,6 +23,7 @@ export default function SignUp() {
   const [hideCPassword, setHideCPassword] = useState(true);
   const [submitState, setSubmitState] = useState(false);
   const [checkP, setCheckP] = useState(false);
+  const [emailValidationState, setEmailValidationState] = useState(true)
 
 
   //submit button
@@ -132,6 +134,11 @@ export default function SignUp() {
     }
   }
 
+  const onChangeEmail = (e: FocusEvent<HTMLInputElement>) => {
+    setEmail(e.target.value)
+    setEmailValidationState(emailValidation(e.target.value))
+  }
+
   return (
     <Box m={3}>
       <ActionBar>
@@ -159,10 +166,10 @@ export default function SignUp() {
             Learn new things, anytime you want.
           </Typography>
           <Stack spacing={2}>
-            <TextField onChange={(e) => setEmail(e.target.value)} variant="outlined" label="Email" fullWidth 
+            <TextField onChange={onChangeEmail} variant="outlined" label="Email" fullWidth 
             onBlur={onBlurEmail}
-            error={emailState? false:true}
-            helperText={emailState?"":"Email can not empty"}/>
+            error={emailState&&emailValidationState? false:true}
+            helperText={emailState?(emailValidationState?"":"not an email"):"Email can not empty"}/>
             <Box display="flex" sx={{ gap: 1 }}>
               <TextField onChange={(e) => setFirstName(e.target.value)} variant="outlined" label="First name" fullWidth 
               onBlur={onBlurFName}
