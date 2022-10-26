@@ -14,7 +14,7 @@ const URI = "mongodb+srv://hoanghoang262:hoang2622002@cluster0.necqb.mongodb.net
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000","http://127.0.0.1:3000"]
 }));
 
 //add mongoose database
