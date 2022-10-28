@@ -42,3 +42,16 @@ export const signUp = async (data, callback) => {
             console.log(err)
         })
 }
+
+//update user ìno api
+export const updateUserInfo = async (data, callback) => {
+    if(findAccByEmai)
+    await axios.post(`${url}/user_manager/update`, data)
+        .then(res => {
+            callback(res.data);
+            return res.data
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}

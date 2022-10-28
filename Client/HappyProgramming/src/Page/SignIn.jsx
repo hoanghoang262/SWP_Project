@@ -41,7 +41,6 @@ export default function SignIn() {
       }else{
         console.log("Sign in success");
       }
-      navigate("/");
     });
   }
 
