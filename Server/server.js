@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import userManager from "./routers/user_manager.js";
 import Authentication from "./routers/user_authentication.js";
+import accToke from "./routers/accToken.js"
 
 //app init 
 const app = express();
@@ -32,6 +33,7 @@ mongoose.connect(URI,{ useNewUrlParser: true, useUnifiedTopology: true})
 //add router 
 app.use("/user_manager",userManager);
 app.use("/user_authentication",Authentication);
+app.use("/accToken",accToke);
 
 app.get('/' , (req,res) =>{
     res.send('SUCCESS');
