@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { BiHide, BiShow } from 'react-icons/bi';
 import { Link as RouterLink } from 'react-router-dom';
 import ActionBar from '../Component/ActionBar';
-import { signUp } from '../Api/Authentication';
+import { findAccByEmai, signUp } from '../Api/Authentication';
 import React, { FocusEvent } from 'react';
 import { emailValidation } from '../Component/Validation'
 
@@ -25,9 +25,21 @@ export default function SignUp() {
   const [checkP, setCheckP] = useState(false);
   const [emailValidationState, setEmailValidationState] = useState(true)
 
+  const submit = async () =>{
+    const data = {
+      email:email
+    }
+    await findAccByEmai(data, (res:any) => {
+      if (res == null) {
+        console.log("Email valid");
+        submitHandle();
+      } else {
+        console.log("Email duplication", res)
+      }
+    });
+  }
 
-  //submit button
-  const submit = () => {
+  const submitHandle = () => {
     const data = {
       email: email,
       firstName: firstName,
