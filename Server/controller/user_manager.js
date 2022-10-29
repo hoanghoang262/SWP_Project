@@ -44,13 +44,13 @@ export const postMethod = async (req,res) =>{
 export const updateMethod = async (req,res) =>{
     try{
         const updateData = req.body;
-        const userInfo = userInfoModel.findByIdAndUpdate(updateData._id,updateData,{new: true},(error,doc) => {
+        await userInfoModel.findByIdAndUpdate(updateData._id,updateData,{new: true},(error,doc) => {
             if(error){
                 console.log("error")
             }
             console.log("doc : " , doc)
-            res.status(200).json(doc);
-        }); 
+            res.status(200).json();
+        }).clone(); 
     }catch(err){
         console.log(err);
         res.status(500).json({error : err});

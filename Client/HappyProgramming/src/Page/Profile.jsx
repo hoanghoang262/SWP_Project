@@ -1,7 +1,24 @@
 import { Box, Typography, Container, Stack, Button } from '@mui/material';
+import { useRef, useState } from 'react';
+import { findAccByEmai } from '../Api/Authentication';
 import UserProfileForm from '../Component/UserProfileForm';
 
 export default function Profile() {
+  const [save,setSave] = useState(false);
+  const childFunc = useRef(null)
+
+  //set save button state
+  const checkSave = (is) =>{
+    console.log(is)
+    if(is != save){
+      setSave(is)
+    }
+  }
+
+  const submit = () => {
+    childFunc.update();
+  }
+
   return (
     <>
       <Box display="flex" justifyContent="center">
@@ -18,9 +35,11 @@ export default function Profile() {
                 src="https://static.vecteezy.com/system/resources/previews/002/002/403/large_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg"
               />
             </Box>
-            <UserProfileForm />
+            <UserProfileForm checkSave = {checkSave} childFunc = {childFunc}/>
             <div>
-              <Button variant="contained">Save</Button>
+              <Button
+                onClick={submit} 
+                disabled ={save ? false: true} variant="contained">Save</Button>
             </div>
           </Stack>
         </Container>

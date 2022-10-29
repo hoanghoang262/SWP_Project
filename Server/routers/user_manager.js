@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/',getMethod);   //read method 
 router.post('/',postMethod); //create method
 router.post("/update",updateMethod);//update method
+router.get("/update",(req,res) => {res.status(200).json("Update user info")});//get update method
 router.post("/delete",deleteMethod);//delete method
 router.get("/deleteAll",deleteAllMethod);//delete all acc method
 router.post("/findAccByEmail",findAccByEmail);//find account by an email

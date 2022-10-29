@@ -40,6 +40,7 @@ export default function SignIn() {
         console.log("Sign in deline");
       }else{
         console.log("Sign in success");
+        navigate("/")
       }
     });
   }
@@ -119,8 +120,9 @@ export default function SignIn() {
                        onChange={onChangeEmail} 
                        variant="outlined" label="Email" fullWidth autoFocus
                        inputProps={{
+                        autoComplete: 'email',
                         form: {
-                          autocomplete: 'off',
+                          autoComplete: 'off',
                         },
                       }}/>
             <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Password" type={hidePassword ? "password" : "text"} fullWidth

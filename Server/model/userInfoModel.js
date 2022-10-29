@@ -9,8 +9,11 @@ const schema = new mongoose.Schema({
         type: String,
         default: 'Anonymous',
     },
-    birth: {
+    birthDay: {
         type: Date,       
+    },
+    age:{
+        type: Number,
     },
     email: {
         type: String,

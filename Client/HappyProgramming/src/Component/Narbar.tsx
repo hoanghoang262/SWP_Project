@@ -1,8 +1,7 @@
-import { ClassNames } from '@emotion/react';
 import { Avatar, Button, Menu, MenuItem } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
 import React, { useEffect, useState} from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from 'recoil';
 import { userInfoState } from '../Recoil/Atom';
 import logo from "./favicon.ico"
@@ -92,10 +91,10 @@ const Narbar = () => {
             <nav className="shadow-2xl shadow-gray-400 bg-white h-20 px-2 sm:px-4 py-2.5 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
                 <div className="container flex flex-wrap justify-between items-center m-auto ">
                     {/* main web logo  */}
-                    <a href="/" className="flex items-center">
+                    <Link to="/" className="flex items-center">
                         <img src={logo} className="mr-3 h-6 sm:h-9" alt="Happy Logo" />
                         <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Happy Program</span>
-                    </a>
+                    </Link>
                     {/* button when mobile size */}
                     <div className="flex md:order-2">
                         {(userInfo == null || userInfo.length == 0) ? signInButton : dropMenu}
@@ -108,16 +107,16 @@ const Narbar = () => {
                     <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                         <ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
-                                <a href="/" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{home}</a>
+                                <Link to="/" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{home}</Link>
                             </li>
                             <li>
-                                <a href="/about" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{about}</a>
+                                <Link to="/about" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{about}</Link>
                             </li>
                             <li>
-                                <a href="/service" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{service}</a>
+                                <Link to="/service" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{service}</Link>
                             </li>
                             <li>
-                                <a href="/contact" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{contact}</a>
+                                <Link to="/contact" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{contact}</Link>
                             </li>
                         </ul>
                     </div>

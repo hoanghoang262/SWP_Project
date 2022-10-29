@@ -20,7 +20,7 @@ export const checkSignIn = async (email, password, callback) => {
 
 //check email duplication
 export const findAccByEmai = async (data, callback) => {
-    await axios.post(`${url}/user_manager/findAccByEmail`,data)
+    await axios.post(`${url}/user_manager/findAccByEmail`, data)
         .then(res => {
             callback(res.data);
             return res.data
@@ -32,24 +32,22 @@ export const findAccByEmai = async (data, callback) => {
 
 //create new user api
 export const signUp = async (data, callback) => {
-    if(findAccByEmai)
-    await axios.post(`${url}/user_manager`, data)
-        .then(res => {
-            callback(res.data);
-            return res.data
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+    if (findAccByEmai) {
+        await axios.post(`${url}/user_manager`, data)
+            .then(res => {
+                callback(res.data);
+                return res.data
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 }
 
-//update user ìno api
 export const updateUserInfo = async (data, callback) => {
-    if(findAccByEmai)
     await axios.post(`${url}/user_manager/update`, data)
         .then(res => {
             callback(res.data);
-            return res.data
         })
         .catch((err) => {
             console.log(err)

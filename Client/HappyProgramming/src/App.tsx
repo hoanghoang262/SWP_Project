@@ -7,11 +7,9 @@ import ForgotPassword from './Page/ForgotPassword'
 import About from './Page/About'
 import Contact from './Page/Contact'
 import Profile from './Page/Profile'
-import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from "recoil"
 import Narbar from './Component/Narbar'
 function App() {
   return (
-    <RecoilRoot>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<HomePage />} /> {/* home page */}
@@ -25,7 +23,6 @@ function App() {
           <Route path='/service' element={<><Narbar/></>}/>{/*service*/}
         </Routes>
       </BrowserRouter>
-    </RecoilRoot>
   )
 }
 
