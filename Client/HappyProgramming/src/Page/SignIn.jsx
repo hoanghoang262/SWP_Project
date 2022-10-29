@@ -19,6 +19,7 @@ import {checkSignIn} from "../Api/Authentication"
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userInfoState } from '../Recoil/Atom';
 import { emailValidation } from '../Component/Validation'
+import { findAccByEmai, signUp } from '../Api/Authentication';
  
 export default function SignIn() {
   const [email, setEmail] = useState('');
@@ -29,38 +30,45 @@ export default function SignIn() {
   const [submitState,setSubmitState] = useState(false);
   const [userInfo,setUserInfo] = useRecoilState(userInfoState);
   const [emailValidationState, setEmailValidationState] = useState(true)
+  const [errorEmail, setErrorEmail] = useState("");
+  const [afterSubmit, setAfterSubmit] = useState(true)
 
+
+  
 
   const navigate = useNavigate();
   //submid sign in
   const submit = () =>{
     checkSignIn(email,password,(inputData) => {
       setUserInfo(inputData);
-      if(userInfo == null || userInfo == []){
+      if(userInfo == null){
         console.log("Sign in deline");
       }else{
         console.log("Sign in success");
-        navigate("/")
       }
+      navigate("/");
     });
   }
 
   //check submit state
   useEffect(() =>{
-    if(email != "" && password != ""){
+    if(errorEmail == ""&&email!=""&& password != ""){
       setSubmitState(true)
     }else{
       setSubmitState(false)
     }
-  },[email,password])
+  },[errorEmail,email,password])
 
 
   //set email state message
   const onBlurEmail = (e) => {
     if(e.target.value == ""){
-      setEmailState(false);
-    }else{
-      setEmailState(true);
+      setErrorEmail("Email can not be empty");
+    }else if(!emailValidation(e.target.value)){
+      setErrorEmail("Email invalid")
+    }
+    else{
+      setErrorEmail("");;
     }
   }
 
@@ -74,7 +82,13 @@ export default function SignIn() {
 
   const onChangeEmail = (e) =>{
     setEmail(e.target.value)
-    setEmailValidationState(emailValidation(e.target.value))
+    if(e.target.value == ""){
+      setErrorEmail("Email can not be empty");
+    }else if(!emailValidation(e.target.value)){
+      setErrorEmail("Email invalid")
+    }else{
+      setErrorEmail("")
+    }
   }
   
 
@@ -115,14 +129,13 @@ export default function SignIn() {
           <Stack spacing={2}>
             <TextField onBlur={(e)=> onBlurEmail(e)} 
                        onFocus={() => {setEmailState(true)}}
-                       error={emailState&&emailValidationState ? false : true} 
-                       helperText={emailState ? (emailValidationState? "":"Not an email") : "Email can not empty"} 
+                       error={errorEmail=="" ? false : true} 
+                       helperText={errorEmail} 
                        onChange={onChangeEmail} 
                        variant="outlined" label="Email" fullWidth autoFocus
                        inputProps={{
-                        autoComplete: 'email',
                         form: {
-                          autoComplete: 'off',
+                          autocomplete: 'off',
                         },
                       }}/>
             <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Password" type={hidePassword ? "password" : "text"} fullWidth
