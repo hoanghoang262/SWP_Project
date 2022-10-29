@@ -181,13 +181,7 @@ export default function SignUp() {
             <TextField onChange={onChangeEmail} variant="outlined" label="Email" fullWidth 
             onBlur={onBlurEmail}
             error={emailState&&emailValidationState? false:true}
-            helperText={emailState?(emailValidationState?"":"not an email"):"Email can not empty"}
-            inputProps={{
-              autoComplete: 'new-password',
-              form: {
-                autoComplete: 'off',
-              },
-            }}/>
+            helperText={emailState?(emailValidationState?"":"not an email"):"Email can not empty"}/>
             <Box display="flex" sx={{ gap: 1 }}>
               <TextField onChange={(e) => setFirstName(e.target.value)} variant="outlined" label="First name" fullWidth 
               onBlur={onBlurFName}
@@ -204,7 +198,6 @@ export default function SignUp() {
               helperText={passState?"":"Password can not empty"}
               color={rPassState&&ComparePass? "success":"primary"}
               InputProps={{
-                autoComplete: 'new-password',
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={() => setHidePassword(!hidePassword)}>
