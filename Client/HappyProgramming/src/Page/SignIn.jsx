@@ -36,7 +36,7 @@ export default function SignIn() {
   const submit = () =>{
     checkSignIn(email,password,(inputData) => {
       setUserInfo(inputData);
-      if(userInfo == null){
+      if(userInfo == null || userInfo == []){
         console.log("Sign in deline");
       }else{
         console.log("Sign in success");

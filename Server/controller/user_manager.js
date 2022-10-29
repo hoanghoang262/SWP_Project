@@ -29,9 +29,9 @@ export const postMethod = async (req,res) =>{
             token:crypto.randomBytes(32).toString("Hex")
         }).save()
         //tao verify url to send 
-        const url = `http://localhost:3000/user_authentication/${userInfo._id}/verify/${token.token}`
+        const url = `http://localhost:5000/user_authentication/${userInfo._id}/verify/${token.token}`
         //send mail
-        await sendEmail(userInfo.email,"Verify Email",url)
+        await sendEmail(userInfo.email,"Verify Email","Click here to verify Acc\n" + url)
         res.status(200).json(userInfo);
     }
     catch(err){
