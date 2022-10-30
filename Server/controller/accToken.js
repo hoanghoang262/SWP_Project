@@ -12,6 +12,49 @@ export const getMethod = async (req,res) =>{
     }
 }
 
+//verify token
+export const verifyToken = async (req,res) => {
+    try{
+        const user = await userInfoModel.findOne({_id:req.params.id})
+        if(!user) return res.status(400).send({message:"Invalid link"})
+        const token = await tokenModel.findOne({
+            userID:user._id,
+            token:req.params.token
+        })
+        if(!token) return res.status(400).send({message:"Invalid link"})
+        await userInfoModel.updateOne({_id: user._id,verified:true})
+        await token.remove()
+        res.status(200).send({message: "Email verified"})
+    }catch(err){
+        console.log(err)
+        res.status(500).json({error : err});
+    }
+}
+
+//resend email verify
+export const resendEmailVerify = async (req,res) => {
+    try{
+        //doc du lieu nguoi dung tu request
+        const data = req.body;
+        //clear all verify token of this acc
+        await tokenModel.deleteMany({"userID":data._id})
+        //create email token verify data to database []
+        const token = await new tokenModel({
+            userID:data._id,
+            token:crypto.randomBytes(32).toString("Hex")
+        }).save()
+        //tao verify url to send 
+        const url = `http://localhost:5000/accToken/${data._id}/verify/${token.token}`
+        //send mail
+        await sendEmail(data.email,"Verify Email","Click here to verify Acc\n" + url)
+        res.status(200).json(data);
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({error : err});
+    }
+}
+
 //delete all token method
 export const deleteAllMethod = async (req,res) => {
     try{

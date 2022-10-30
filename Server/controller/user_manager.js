@@ -4,6 +4,7 @@ import { userInfoModel } from "../model/userInfoModel.js"
 import {tokenModel} from "../model/token.js"
 import {sendEmail} from "../Util/sendEmail.js"
 import crypto from "crypto"
+
 // get all user data medthod 
 export const getMethod = async (req,res) =>{
     try{
@@ -29,7 +30,7 @@ export const postMethod = async (req,res) =>{
             token:crypto.randomBytes(32).toString("Hex")
         }).save()
         //tao verify url to send 
-        const url = `http://localhost:5000/user_authentication/${userInfo._id}/verify/${token.token}`
+        const url = `http://localhost:5000/accToken/${userInfo._id}/verify/${token.token}`
         //send mail
         await sendEmail(userInfo.email,"Verify Email","Click here to verify Acc\n" + url)
         res.status(200).json(userInfo);
@@ -39,6 +40,8 @@ export const postMethod = async (req,res) =>{
         res.status(500).json({error : err});
     }
 }
+
+
 
 //update user info method
 export const updateMethod = async (req,res) =>{

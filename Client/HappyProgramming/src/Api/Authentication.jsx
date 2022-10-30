@@ -44,6 +44,18 @@ export const signUp = async (data, callback) => {
     }
 }
 
+//resend email verify
+export const resendEmail = async (data,callback) =>{
+    await axios.post(`${url}/accToken/resendEmail`, data)
+    .then(res => {
+        callback(res.data);
+        return res.data
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+
 export const updateUserInfo = async (data, callback) => {
     await axios.post(`${url}/user_manager/update`, data)
         .then(res => {
