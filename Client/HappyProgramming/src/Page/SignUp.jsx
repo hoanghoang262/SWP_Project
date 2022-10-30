@@ -39,7 +39,11 @@ export default function SignUp() {
         setAlarmMessage(<Alert id='alert'sx={{ position: 'absolute', width: '15%'}} style={{bottom: 50, right:0}}>Create account success</Alert>)
         setTimeout(() => {
           setAlarmMessage(null)
-          navigate("/verifyEmail")
+          navigate("/verifyEmail",{
+            state:{
+              name: firstName+lastName,
+            }
+          })
         }, 1000);
       } else {
         console.log("Email duplication", res)
