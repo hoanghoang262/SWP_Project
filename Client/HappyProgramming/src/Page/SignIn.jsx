@@ -31,22 +31,17 @@ export default function SignIn() {
   const [userInfo,setUserInfo] = useRecoilState(userInfoState);
   const [emailValidationState, setEmailValidationState] = useState(true)
   const [errorEmail, setErrorEmail] = useState("");
-  const [afterSubmit, setAfterSubmit] = useState(true)
-
-
-  
-
   const navigate = useNavigate();
   //submid sign in
   const submit = () =>{
     checkSignIn(email,password,(inputData) => {
-      setUserInfo(inputData);
-      if(userInfo == null){
+      setUserInfo(inputData);  // loi khong the update ngay
+      if(userInfo == null || userInfo.email == null || userInfo == []){
         console.log("Sign in deline");
       }else{
         console.log("Sign in success");
+        navigate("/");
       }
-      navigate("/");
     });
   }
 
@@ -80,6 +75,7 @@ export default function SignIn() {
     }
   }
 
+  //onchange email value
   const onChangeEmail = (e) =>{
     setEmail(e.target.value)
     if(e.target.value == ""){

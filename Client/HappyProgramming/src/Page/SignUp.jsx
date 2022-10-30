@@ -24,20 +24,9 @@ export default function SignUp() {
   const [checkP, setCheckP] = useState(false);
   const [errorEmail, setErrorEmail] = useState("");
   const [afterSubmit, setAfterSubmit] = useState(true)
-
+  const [alarmMessage,setAlarmMessage] = useState(null)
 
   const navigate = useNavigate();
-
-  useEffect(()=>{
-    var alert = document.getElementById('alert')
-    alert.style.display = 'block'
-    setTimeout(()=>{
-      alert.style.display = 'none'
-      console.log(alert)
-      setAfterSubmit(true)
-    },5000)
-  },[afterSubmit])
-
   const submit = async () =>{
     const data = {
       email:email
@@ -45,11 +34,19 @@ export default function SignUp() {
     await findAccByEmai(data, (res) => {
       if (res == null) {
         console.log("Email valid");
+        //thong bao hien thi alarm
         submitHandle();
-        navigate("/")
+        setAlarmMessage(<Alert id='alert'sx={{ position: 'absolute', width: '15%'}} style={{bottom: 50, right:0}}>Create account success</Alert>)
+        setTimeout(() => {
+          setAlarmMessage(null)
+          navigate("/verifyEmail")
+        }, 1000);
       } else {
         console.log("Email duplication", res)
-        setAfterSubmit(false);
+        setAlarmMessage(<Alert id='alert'sx={{ position: 'absolute', width: '15%'}} style={{bottom: 50, right:0}} severity = "error">Email duplicate</Alert>)
+        setTimeout(() => {
+          setAlarmMessage(null)
+        }, 3000);
       }
     });
   }
@@ -208,7 +205,13 @@ export default function SignUp() {
             <TextField onChange={onChangeEmail} variant="outlined" label="Email" fullWidth 
             onBlur={onBlurEmail}
             error={errorEmail==""? false:true}
-            helperText={errorEmail}/>
+            helperText={errorEmail}
+            inputProps={{
+              autoComplete:'new-password',
+              form: {
+                autocomplete: 'off',
+              },
+            }}/>
             <Box display="flex" sx={{ gap: 1 }}>
               <TextField onChange={(e) => setFirstName(e.target.value)} variant="outlined" label="First name" fullWidth 
               onBlur={onBlurFName}
@@ -225,6 +228,10 @@ export default function SignUp() {
               helperText={passState?"":"Password can not empty"}
               color={rPassState&&ComparePass? "success":"primary"}
               InputProps={{
+                autoComplete:'new-password',
+                form: {
+                  autocomplete: 'off',
+                },
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={() => setHidePassword(!hidePassword)}>
@@ -253,12 +260,8 @@ export default function SignUp() {
           <Button disabled={submitState ? false : true} onClick={() => submit()} variant="contained" sx={{ height: 50 }}>
             Sign Up
           </Button>
-
-          
         </Stack>
-
-        <Alert id='alert'sx={{ position: 'absolute', width: '15%'}} style={{top: 60, right: 10}} severity={afterSubmit? "":"error"}>{afterSubmit?"":"Email duplicate"}</Alert>
-
+        {alarmMessage}
       </Container>
     </Box>
   );

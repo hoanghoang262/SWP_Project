@@ -8,6 +8,7 @@ import About from './Page/About'
 import Contact from './Page/Contact'
 import Profile from './Page/Profile'
 import Narbar from './Component/Narbar'
+import VerifyEmail from './Page/VerifyEmail'
 function App() {
   return (
       <BrowserRouter>
@@ -21,6 +22,7 @@ function App() {
           <Route path='/userProfile' element={<><Narbar/><Profile/></>} />{/* */}
           <Route path='/coursePage' /> {/* page show up list of course */}
           <Route path='/service' element={<><Narbar/></>}/>{/*service*/}
+          <Route path='/verifyEmail' element={<VerifyEmail/>}/>{/*access when user didnt verify email*/}
         </Routes>
       </BrowserRouter>
   )
