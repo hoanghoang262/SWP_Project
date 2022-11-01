@@ -1,5 +1,5 @@
 import express from "express"
-import { createCourse, deleteAllCourse, deleteCourse, showAllCourse, updateCourse } from "../controller/course"
+import { createCourse, deleteAllCourse, deleteCourse, showAllCourse, updateCourse } from "../controller/course.js"
 
 //create course router
 const router = express.Router()

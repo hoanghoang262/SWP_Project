@@ -1,4 +1,4 @@
-import { courseModel } from "../model/courseModel";
+import { courseModel } from "../model/courseModel.js";
 
 //get data of all course in mongo database
 export const showAllCourse = async () =>{

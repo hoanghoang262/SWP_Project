@@ -4,7 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import userManager from "./routers/user_manager.js";
 import Authentication from "./routers/user_authentication.js";
-import Course from "./routers/course"
+import Course from "./routers/course.js"
 import accToke from "./routers/accToken.js"
 
 //app init 
