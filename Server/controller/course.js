@@ -1,7 +1,7 @@
 import { courseModel } from "../model/courseModel.js";
 
 //get data of all course in mongo database
-export const showAllCourse = async () =>{
+export const showAllCourse = async (req,res) =>{
     try{
         const courseInfo = await courseModel.find();
         console.log("useInfo :" , courseInfo);

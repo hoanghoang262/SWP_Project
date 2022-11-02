@@ -7,10 +7,10 @@ import { userInfoState } from '../Recoil/Atom';
 import logo from "./favicon.ico"
 const Narbar = () => {
     //set up for dropdowm menu
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const [path, setPath] = useState("/")
     const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
@@ -66,6 +66,7 @@ const Narbar = () => {
     let home = <p>Home</p>
     let about = <p>About</p>
     let contact = <p>Contact</p>
+    let admin = <p>Admin control</p>
 
     const setCilentPath = ()=>{
         
@@ -118,6 +119,9 @@ const Narbar = () => {
                             <li>
                                 <Link to="/contact" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{contact}</Link>
                             </li>
+                            {userInfo.role ? <li>
+                                <Link to="/admin" className="text-lg block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{admin}</Link>
+                            </li> : null}
                         </ul>
                     </div>
                 </div>
