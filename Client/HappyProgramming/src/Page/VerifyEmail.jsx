@@ -37,12 +37,13 @@ function VerifyEmail(){
                  account and verify your account, unless your want to abort the process </Typography>
                  <Box sx={{backgroundColor: '#fcfaf2', marginY: '5%', height: 120, marginX: '10%', display:'flex' ,justifyContent: 'center',
                 alignItems: 'center'}}>
-                 <Button variant="contained" sx={{margin:'auto'}}>Dont verify my account</Button>
+                 <Button variant="contained" sx={{margin:'auto'}}>Resend Email</Button>
                  </Box>
                  <Typography sx={{textAlign:'center', paddingX: '10%'}}>Thank you for intrust and using our service, see you later </Typography>
+                 <Button variant="contained" sx={{marginLeft: '68%', marginTop: '5%'}}>Back to log in</Button>
              </Box>
         </div>
-    )
+    ) 
 }
 
 export default VerifyEmail

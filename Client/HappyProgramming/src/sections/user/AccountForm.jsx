@@ -34,6 +34,12 @@ export default function AccountForm({ isNew }) {
         />
         <TextField
           variant="outlined"
+          label="Birthday"
+          value="23/12/2002"
+          fullWidth
+        />
+        <TextField
+          variant="outlined"
           label="Phone Number"
           value={_user.phoneNumber}
           fullWidth
@@ -42,36 +48,6 @@ export default function AccountForm({ isNew }) {
           variant="outlined"
           label="Address"
           value={_user.address}
-          fullWidth
-        />
-        <TextField
-          variant="outlined"
-          label="Country"
-          value={_user.country}
-          fullWidth
-        />
-        <TextField
-          variant="outlined"
-          label="Region"
-          value={_user.state}
-          fullWidth
-        />
-        <TextField
-          variant="outlined"
-          label="City"
-          value={_user.city}
-          fullWidth
-        />
-        <TextField
-          variant="outlined"
-          label="Zip code"
-          value={_user.zipCode}
-          fullWidth
-        />
-        <TextField
-          variant="outlined"
-          label="Country"
-          value={_user.country}
           fullWidth
         />
       </Box>

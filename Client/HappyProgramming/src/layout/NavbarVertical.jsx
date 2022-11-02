@@ -1,6 +1,6 @@
 import { Card, Divider, Stack } from '@mui/material';
-import Iconify from '../components/Iconify';
-import Logo from '../components/Logo';
+import Iconify from '../Component/Iconify';
+import Logo from '../Component/Logo';
 import NavItem from './NavItem';
 import { NAVBAR_WIDTH } from '../config';
 

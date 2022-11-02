@@ -62,22 +62,28 @@ const headCells = [
     label: 'Email',
   },
   {
+    id: 'age',
+    numeric: false,
+    disablePadding: false,
+    label: 'Age',
+  },
+  {
+    id: 'birthday',
+    numeric: false,
+    disablePadding: false,
+    label: 'Birthday',
+  },
+  {
     id: 'phone',
     numeric: false,
     disablePadding: false,
     label: 'Phone',
   },
   {
-    id: 'Country',
+    id: 'address',
     numeric: false,
     disablePadding: false,
-    label: 'Country',
-  },
-  {
-    id: 'Verified',
-    numeric: false,
-    disablePadding: false,
-    label: 'Verified',
+    label: 'Address',
   },
 ];
 
@@ -197,8 +203,10 @@ export default function UserTable({ onRowClick }) {
                       </TableCell>
                       {/* data in hear */}
                       <TableCell>{row.email}</TableCell>
+                      <TableCell>{row.age}</TableCell>
+                      <TableCell>{row.birthday}</TableCell>
                       <TableCell>{row.phoneNumber}</TableCell>
-                      <TableCell>{row.country}</TableCell>
+                      <TableCell>{row.address}</TableCell>
                       <TableCell align="center">
                         {row.isVerified && (
                           <Iconify

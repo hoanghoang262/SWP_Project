@@ -9,8 +9,8 @@ import {
   IconButton,
   Stack,
 } from '@mui/material';
-import Logo from '../components/Logo';
-import Iconify from '../components/Iconify';
+import Logo from '../Component/Logo';
+import Iconify from '../Component/Iconify';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 

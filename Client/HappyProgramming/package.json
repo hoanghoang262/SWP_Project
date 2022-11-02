@@ -15,7 +15,7 @@
     "@iconify/react": "^4.0.0",
     "@mui/icons-material": "^5.10.6",
     "@mui/lab": "^5.0.0-alpha.105",
-    "@mui/material": "^5.10.7",
+    "@mui/material": "^5.10.11",
     "@mui/x-date-pickers": "^5.0.6",
     "axios": "^1.0.0",
     "change-case": "^4.1.2",
