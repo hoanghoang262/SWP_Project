@@ -15,78 +15,93 @@ import { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ActionBar from '../Component/ActionBar'
 import { BiShow, BiHide } from "react-icons/bi";
-import {checkSignIn} from "../Api/Authentication"
+import { checkSignIn } from "../Api/Authentication"
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { userInfoState } from '../Recoil/Atom';
 import { emailValidation } from '../Component/Validation'
 import { findAccByEmai, signUp } from '../Api/Authentication';
- 
+
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [emailState, setEmailState] = useState(true);
   const [password, setPassword] = useState('');
   const [passState, setPassState] = useState(true);
   const [hidePassword, setHidePassword] = useState(true);
-  const [submitState,setSubmitState] = useState(false);
-  const [userInfo,setUserInfo] = useRecoilState(userInfoState);
+  const [submitState, setSubmitState] = useState(false);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [emailValidationState, setEmailValidationState] = useState(true)
   const [errorEmail, setErrorEmail] = useState("");
   const navigate = useNavigate();
   //submid sign in
-  const submit = () =>{
-    checkSignIn(email,password,(inputData) => {
-      setUserInfo(inputData);  // loi khong the update ngay
-      if(userInfo == null || userInfo.email == null || userInfo == []){
+  const submit = () => {
+    checkSignIn(email, password, (inputData) => {
+      if (inputData == null || inputData.email == null || inputData == []) {
         console.log("Sign in deline");
-      }else{
-        console.log("Sign in success");
-        navigate("/");
+      } else {
+        if (inputData.ban == true) {
+          console.log("This acc is baned")
+        } else if (inputData.verified == false) {
+          console.log("This acc didnt verify")
+          findAccByEmai({email:email},(outputData) =>{
+            navigate("/verifyEmail", {
+              state: {
+                data:outputData,
+                email: email
+              }
+            })
+          });
+        }
+        else {
+          console.log("Sign in success");
+          setUserInfo(inputData);
+          navigate("/");
+        }
       }
     });
   }
 
   //check submit state
-  useEffect(() =>{
-    if(errorEmail == ""&&email!=""&& password != ""){
+  useEffect(() => {
+    if (errorEmail == "" && email != "" && password != "") {
       setSubmitState(true)
-    }else{
+    } else {
       setSubmitState(false)
     }
-  },[errorEmail,email,password])
+  }, [errorEmail, email, password])
 
 
   //set email state message
   const onBlurEmail = (e) => {
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setErrorEmail("Email can not be empty");
-    }else if(!emailValidation(e.target.value)){
+    } else if (!emailValidation(e.target.value)) {
       setErrorEmail("Email invalid")
     }
-    else{
+    else {
       setErrorEmail("");;
     }
   }
 
   const onBlurPassword = (e) => {
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setPassState(false)
-    }else{
+    } else {
       setPassState(true)
     }
   }
 
   //onchange email value
-  const onChangeEmail = (e) =>{
+  const onChangeEmail = (e) => {
     setEmail(e.target.value)
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setErrorEmail("Email can not be empty");
-    }else if(!emailValidation(e.target.value)){
+    } else if (!emailValidation(e.target.value)) {
       setErrorEmail("Email invalid")
-    }else{
+    } else {
       setErrorEmail("")
     }
   }
-  
+
 
   return (
     <Box m={3}>
@@ -123,17 +138,17 @@ export default function SignIn() {
             Enter your details below.
           </Typography>
           <Stack spacing={2}>
-            <TextField onBlur={(e)=> onBlurEmail(e)} 
-                       onFocus={() => {setEmailState(true)}}
-                       error={errorEmail=="" ? false : true} 
-                       helperText={errorEmail} 
-                       onChange={onChangeEmail} 
-                       variant="outlined" label="Email" fullWidth autoFocus
-                       inputProps={{
-                        form: {
-                          autocomplete: 'off',
-                        },
-                      }}/>
+            <TextField onBlur={(e) => onBlurEmail(e)}
+              onFocus={() => { setEmailState(true) }}
+              error={errorEmail == "" ? false : true}
+              helperText={errorEmail}
+              onChange={onChangeEmail}
+              variant="outlined" label="Email" fullWidth autoFocus
+              inputProps={{
+                form: {
+                  autocomplete: 'off',
+                },
+              }} />
             <TextField onChange={(e) => setPassword(e.target.value)} variant="outlined" label="Password" type={hidePassword ? "password" : "text"} fullWidth
               onBlur={onBlurPassword}
               error={passState ? false : true}

@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
         require:true 
     },
     phoneNumber:{
-        type: String,
+        type: Number,
     },address:{
         type: String
     },
@@ -30,6 +30,10 @@ const schema = new mongoose.Schema({
     role:{
         type: String,
         default: "normal"
+    },
+    ban:{
+        type: Boolean,
+        default: false
     },
     verified:{
         type:Boolean,

@@ -77,10 +77,10 @@ export const deleteMethod = async (req,res) => {
     }
 }
 
-//delete all userinfo method
+//delete all userinfo method except admin acc
 export const deleteAllMethod = async (req,res) => {
     try{
-        await userInfoModel.deleteMany({})
+        await userInfoModel.deleteMany({role:{$ne: "admin"}})
         res.status(200).json("deleteAll")
     }catch(err){
         console.log(err);

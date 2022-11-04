@@ -22,7 +22,9 @@ export const checkSignIn = async (email, password, callback) => {
 export const findAccByEmai = async (data, callback) => {
     await axios.post(`${url}/user_manager/findAccByEmail`, data)
         .then(res => {
-            callback(res.data);
+            if(callback != null){
+                callback(res.data)
+            }
             return res.data
         })
         .catch((err) => {
@@ -56,6 +58,7 @@ export const resendEmail = async (data,callback) =>{
     })
 }
 
+//update
 export const updateUserInfo = async (data, callback) => {
     await axios.post(`${url}/user_manager/update`, data)
         .then(res => {

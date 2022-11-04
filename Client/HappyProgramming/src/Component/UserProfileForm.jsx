@@ -83,11 +83,13 @@ export default function UserProfileForm({ checkSave, childFunc }) {
     textChangeHandle(e, key)
     var str = e.target.value
     if(str == ""){
-      setErrorEmail("PhoneNumber required")
+      setErrorPhone("PhoneNumber required")
     }
     else
-    if(str.length>9||str.length<9){
-      setErrorPhone("Invalid PhoneNumber")
+    if(isNaN(str)){
+      setErrorPhone("Phone number con not in string form ")
+    }else if(str.length < 9 || str.length > 11){
+      setErrorPhone("PhoneNumber in range 9 - 11")
     }else{setErrorPhone("")}
   }
 
@@ -125,11 +127,11 @@ export default function UserProfileForm({ checkSave, childFunc }) {
         display="flex"
         sx={{ flexDirection: { md: 'row', xs: 'column' }, gap: 3 }}
       >
-        <TextField onChange={e => { onChangeFName(e, "firstname") }} 
+        <TextField onChange={e => { onChangeFName(e, "firstName") }} 
         error={errorFName==""? false:true}
         helperText={errorFName}
         variant="outlined" label="First Name" fullWidth defaultValue={data.firstName} />
-        <TextField onChange={e => { onChangeLName(e, "lastname") }} 
+        <TextField onChange={e => { onChangeLName(e, "lastName") }} 
         error={errorLName==""? false:true}
         helperText={errorLName}
         variant="outlined" label="Last Name" fullWidth defaultValue={data.lastName} />

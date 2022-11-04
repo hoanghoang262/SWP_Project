@@ -1,4 +1,5 @@
 import { tokenModel } from "../model/token.js";
+import { userInfoModel } from "../model/userInfoModel.js";
 
 // get all  token data medthod 
 export const getMethod = async (req,res) =>{
@@ -24,7 +25,7 @@ export const verifyToken = async (req,res) => {
         if(!token) return res.status(400).send({message:"Invalid link"})
         await userInfoModel.updateOne({_id: user._id,verified:true})
         await token.remove()
-        res.status(200).send({message: "Email verified"})
+        res.redirect('http://localhost:3000');
     }catch(err){
         console.log(err)
         res.status(500).json({error : err});

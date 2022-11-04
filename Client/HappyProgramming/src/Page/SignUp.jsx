@@ -1,4 +1,4 @@
-import { Box, Button, Container, IconButton, InputAdornment, Link, Stack, TextField, Typography, Alert} from '@mui/material';
+import { Box, Button, Container, IconButton, InputAdornment, Link, Stack, TextField, Typography, Alert } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { BiHide, BiShow } from 'react-icons/bi';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
@@ -24,30 +24,31 @@ export default function SignUp() {
   const [checkP, setCheckP] = useState(false);
   const [errorEmail, setErrorEmail] = useState("");
   const [afterSubmit, setAfterSubmit] = useState(true)
-  const [alarmMessage,setAlarmMessage] = useState(null)
+  const [alarmMessage, setAlarmMessage] = useState(null)
 
   const navigate = useNavigate();
-  const submit = async () =>{
+  const submit = async () => {
     const data = {
-      email:email
+      email: email
     }
     await findAccByEmai(data, (res) => {
       if (res == null) {
         console.log("Email valid");
         //thong bao hien thi alarm
         submitHandle();
-        setAlarmMessage(<Alert id='alert'sx={{ position: 'absolute', width: '15%'}} style={{bottom: 50, right:0}}>Create account success</Alert>)
+        setAlarmMessage(<Alert id='alert' sx={{ position: 'absolute', width: '15%' }} style={{ bottom: 50, right: 0 }}>Create account success</Alert>)
         setTimeout(() => {
           setAlarmMessage(null)
-          navigate("/verifyEmail",{
-            state:{
-              name: firstName+lastName,
+          navigate("/verifyEmail", {
+            state: {
+              name: firstName + lastName,
+              email: email
             }
           })
         }, 1000);
       } else {
         console.log("Email duplication", res)
-        setAlarmMessage(<Alert id='alert'sx={{ position: 'absolute', width: '15%'}} style={{bottom: 50, right:0}} severity = "error">Email duplicate</Alert>)
+        setAlarmMessage(<Alert id='alert' sx={{ position: 'absolute', width: '15%' }} style={{ bottom: 50, right: 0 }} severity="error">Email duplicate</Alert>)
         setTimeout(() => {
           setAlarmMessage(null)
         }, 3000);
@@ -74,14 +75,14 @@ export default function SignUp() {
 
   //set submit button disable state
   useEffect(() => {
-    if (errorEmail == "" &&email!=""&& password != "" && firstName != "" && lastName != "" && checkP == true) {
+    if (errorEmail == "" && email != "" && password != "" && firstName != "" && lastName != "" && checkP == true) {
       setSubmitState(true)
-      
+
     } else {
       setSubmitState(false)
     }
-    
-  }, [errorEmail,email, password, firstName, lastName,checkP])
+
+  }, [errorEmail, email, password, firstName, lastName, checkP])
 
   //check password and repassword
   useEffect(() => {
@@ -90,63 +91,63 @@ export default function SignUp() {
     } else {
       setCheckP(true)
     }
-  },[password,rePassword])
+  }, [password, rePassword])
 
   const onBlurEmail = (e) => {
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setErrorEmail("Email can not be empty")
-    }else if(!emailValidation(e.target.value)){
+    } else if (!emailValidation(e.target.value)) {
       setErrorEmail("Email invalid")
-    }else{
+    } else {
       setErrorEmail("")
     }
   }
 
   const onBlurPassword = (e) => {
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setPassState(false)
-    }else{
+    } else {
       setPassState(true)
     }
   }
 
   const onBlurRePassword = (e) => {
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setRPassState(false)
-    }else{
+    } else {
       setRPassState(true)
     }
   }
 
   const onBlurFName = (e) => {
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setFNameState(false)
-    }else{
+    } else {
       setFNameState(true)
     }
   }
 
   const onBlurLName = (e) => {
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setLNameState(false)
-    }else{
+    } else {
       setLNameState(true)
     }
   }
 
   const onChangeRePass = (e) => {
     setRePassword(e.target.value)
-    
-    if(e.target.value == ""){
+
+    if (e.target.value == "") {
       setRPassState(false)
-    }else{
+    } else {
       setRPassState(true)
     }
 
-    if(e.target.value == password){
+    if (e.target.value == password) {
       setComparePass(true)
 
-    }else{
+    } else {
       setComparePass(false)
     }
   }
@@ -154,27 +155,27 @@ export default function SignUp() {
   const onChangePass = (e) => {
     setPassword(e.target.value)
 
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setPassState(false)
-    }else{
+    } else {
       setPassState(true)
     }
-  
 
-    if(e.target.value == rePassword){
+
+    if (e.target.value == rePassword) {
       setComparePass(true)
-    }else{
+    } else {
       setComparePass(false)
     }
   }
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value)
-    if(e.target.value == ""){
+    if (e.target.value == "") {
       setErrorEmail("Email can not be empty")
-    }else if(!emailValidation(e.target.value)){
+    } else if (!emailValidation(e.target.value)) {
       setErrorEmail("Email is invalid")
-    }else{
+    } else {
       setErrorEmail("")
     }
   }
@@ -206,33 +207,33 @@ export default function SignUp() {
             Learn new things, anytime you want.
           </Typography>
           <Stack spacing={2}>
-            <TextField onChange={onChangeEmail} variant="outlined" label="Email" fullWidth 
-            onBlur={onBlurEmail}
-            error={errorEmail==""? false:true}
-            helperText={errorEmail}
-            inputProps={{
-              autoComplete:'new-password',
-              form: {
-                autocomplete: 'off',
-              },
-            }}/>
+            <TextField onChange={onChangeEmail} variant="outlined" label="Email" fullWidth
+              onBlur={onBlurEmail}
+              error={errorEmail == "" ? false : true}
+              helperText={errorEmail}
+              inputProps={{
+                autoComplete: 'new-password',
+                form: {
+                  autocomplete: 'off',
+                },
+              }} />
             <Box display="flex" sx={{ gap: 1 }}>
-              <TextField onChange={(e) => setFirstName(e.target.value)} variant="outlined" label="First name" fullWidth 
-              onBlur={onBlurFName}
-              error={fNameState? false:true}
-              helperText={fNameState?"":"FirstName can not empty"}/>
-              <TextField onChange={(e) => setLastName(e.target.value)} variant="outlined" label="Last name" fullWidth 
-              onBlur={onBlurLName}
-              error={lNameState? false:true}
-              helperText={lNameState?"":"LastName can not empty"}/>
+              <TextField onChange={(e) => setFirstName(e.target.value)} variant="outlined" label="First name" fullWidth
+                onBlur={onBlurFName}
+                error={fNameState ? false : true}
+                helperText={fNameState ? "" : "FirstName can not empty"} />
+              <TextField onChange={(e) => setLastName(e.target.value)} variant="outlined" label="Last name" fullWidth
+                onBlur={onBlurLName}
+                error={lNameState ? false : true}
+                helperText={lNameState ? "" : "LastName can not empty"} />
             </Box>
             <TextField onChange={onChangePass} variant="outlined" label="Password" type={hidePassword ? "password" : "text"} fullWidth
               onBlur={onBlurPassword}
-              error={passState? false:true}
-              helperText={passState?"":"Password can not empty"}
-              color={rPassState&&ComparePass? "success":"primary"}
+              error={passState ? false : true}
+              helperText={passState ? "" : "Password can not empty"}
+              color={rPassState && ComparePass ? "success" : "primary"}
               InputProps={{
-                autoComplete:'new-password',
+                autoComplete: 'new-password',
                 form: {
                   autocomplete: 'off',
                 },
@@ -247,9 +248,9 @@ export default function SignUp() {
             />
             <TextField onChange={onChangeRePass} variant="outlined" label="Confirm Password" type={hideCPassword ? "password" : "text"} fullWidth
               onBlur={onBlurRePassword}
-              error={rPassState&&ComparePass? false:true}
-              helperText={rPassState?(ComparePass?"":"Wrong pasword"):"Password can not empty"}
-              color={rPassState&&ComparePass? "success":"error"}
+              error={rPassState && ComparePass ? false : true}
+              helperText={rPassState ? (ComparePass ? "" : "Wrong pasword") : "Password can not empty"}
+              color={rPassState && ComparePass ? "success" : "error"}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
