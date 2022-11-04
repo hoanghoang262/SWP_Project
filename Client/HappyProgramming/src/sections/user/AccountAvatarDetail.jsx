@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   Stack,
   Typography,
+  Button,
 } from '@mui/material';
 import { pascalCase } from 'change-case';
 import { useContext } from 'react';
@@ -59,6 +60,10 @@ export default function AccountAvatarDetail({ isNew }) {
             }
           />
         )}
+        <Box>
+        <Button sx={{marginX: "10px",}} color='warning' variant="contained">Mute User</Button> 
+        <Button sx={{marginX: "10px",}} color='error' variant="contained">Ban User</Button>
+        </Box>
       </Stack>
     </Card>
   );
