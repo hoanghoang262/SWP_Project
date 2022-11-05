@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import Narbar from "../Component/Narbar";
 import { userInfoState } from "../Recoil/Atom";
+import CourseList from "./CourseList";
+import CourseExplore from "./CourseExplore";
+import CoursePage from "./CoursePage";
 
 function HomePage() {
     //lay thong tin ve nguo idung trung tam
@@ -18,7 +21,8 @@ function HomePage() {
     return (
         <div>
             <Narbar />
-            <div className="text-3xl font-bold">home page</div>
+            <CourseExplore />
+            
         </div>
     )
 }

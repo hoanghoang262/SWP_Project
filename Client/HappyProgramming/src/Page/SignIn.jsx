@@ -10,6 +10,7 @@ import {
   Checkbox,
   InputAdornment,
   IconButton,
+  Alert
 } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
@@ -31,17 +32,30 @@ export default function SignIn() {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [emailValidationState, setEmailValidationState] = useState(true)
   const [errorEmail, setErrorEmail] = useState("");
+  const [alarmMessage, setAlarmMessage] = useState(null)
   const navigate = useNavigate();
   //submid sign in
   const submit = () => {
     checkSignIn(email, password, (inputData) => {
       if (inputData == null || inputData.email == null || inputData == []) {
         console.log("Sign in deline");
+        setAlarmMessage(<Alert id='alert' sx={{ position: 'absolute', width: '15%' }} style={{ bottom: 50, right: 0 }} severity='warning'>Sign in deline</Alert>)
+        setTimeout(()=>{
+          setAlarmMessage(null)
+      },3000)
       } else {
         if (inputData.ban == true) {
           console.log("This acc is baned")
+          setAlarmMessage(<Alert id='alert' sx={{ position: 'absolute', width: '15%' }} style={{ bottom: 50, right: 0 }} severity='warning'>You have been banned</Alert>)
+          setTimeout(()=>{
+              setAlarmMessage(null)
+          },3000)
         } else if (inputData.verified == false) {
           console.log("This acc didnt verify")
+          setAlarmMessage(<Alert id='alert' sx={{ position: 'absolute', width: '15%' }} style={{ bottom: 50, right: 0 }} severity='warning'>You havent verify</Alert>)
+          setTimeout(()=>{
+            setAlarmMessage(null)
+        },3000)
           findAccByEmai({email:email},(outputData) =>{
             navigate("/verifyEmail", {
               state: {
@@ -179,6 +193,7 @@ export default function SignIn() {
             Sign In
           </Button>
         </Stack>
+        {alarmMessage}
       </Container>
     </Box>
   );

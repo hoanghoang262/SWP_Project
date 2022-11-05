@@ -47,7 +47,7 @@ export default function TopAppBar({ user }) {
         navigate('/course');
         break;
       case 'Logout':
-        navigate('/sign-in');
+        navigate('/signIn');
         break;
 
       default:

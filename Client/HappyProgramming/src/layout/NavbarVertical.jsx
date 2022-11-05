@@ -46,7 +46,7 @@ export default function NavbarVertical() {
           <Divider variant="middle" />
           <NavItem
             text="Logout"
-            route="/sign-in"
+            route="/signIn"
             icon={<Iconify icon="akar-icons:door" sx={{ color: 'white' }} />}
           />
         </Stack>

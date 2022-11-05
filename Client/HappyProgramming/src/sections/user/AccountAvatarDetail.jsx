@@ -61,7 +61,7 @@ export default function AccountAvatarDetail({ isNew }) {
           />
         )}
         <Box>
-        <Button sx={{marginX: "10px",}} color='warning' variant="contained">Mute User</Button> 
+        <Button sx={{marginX: "10px", }} color='warning' variant="contained">Mute User</Button> 
         <Button sx={{marginX: "10px",}} color='error' variant="contained">Ban User</Button>
         </Box>
       </Stack>

@@ -61,10 +61,10 @@ const headCells = [
     label: 'Rating',
   },
   {
-    id: 'price',
+    id: 'author',
     numeric: true,
     disablePadding: false,
-    label: 'price',
+    label: 'Author',
   },
   {
     id: 'online',
