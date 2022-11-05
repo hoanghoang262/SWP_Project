@@ -1,6 +1,6 @@
 import { Avatar, Button, Menu, MenuItem } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from 'recoil';
 import { userInfoState } from '../Recoil/Atom';
@@ -16,25 +16,28 @@ const Narbar = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const handleProfileButton = () =>{
+    const handleProfileButton = () => {
         naviga("/userProfile");
         handleClose();
     }
-    const handleLogoutButton = () =>{
+    const handleLogoutButton = () => {
         setUserInfo([]);
         naviga("/");
         handleClose();
     }
 
+
     //create state and jsx element
     const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+    let avataSrc = "../../../../Server/Avata" + userInfo.avata
     const naviga = useNavigate()
     const signInButton = <button onClick={() => naviga("/signIn")} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Get started</button>
     const avata =
-        <Avatar src='https://static.vecteezy.com/system/resources/previews/002/002/403/large_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg' sx={{ cursor: "pointer", bgcolor: deepOrange[500], width: "45px", height: "45px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <Avatar className="cursor-pointer"
+            src={!userInfo.avata ? 'https://static.vecteezy.com/system/resources/previews/002/002/403/large_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg' : avataSrc} sx={{ cursor: "pointer", bgcolor: deepOrange[500], width: "45px", height: "45px", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <p className='text-2xl' >N</p>
         </Avatar>
-        //drop manu
+    //drop manu
     const dropMenu = <>
         <div>
             <Button
@@ -68,22 +71,22 @@ const Narbar = () => {
     let contact = <p>Contact</p>
     let admin = <p>Admin control</p>
 
-    const setCilentPath = ()=>{
-        
-       switch(window.location.pathname){
-        case "/":
-            home = <p className=' text-blue-700'>Home</p>
-            break;
-        case "/about":
-            about = <p className=' text-blue-500'>About</p>
-            break;
-        case "/contact":
-            contact = <p className=' text-blue-500'>Contact</p>
-            break;
-        case "/service":
-            service = <p className=' text-blue-500'>services</p>
-            break;
-       } 
+    const setCilentPath = () => {
+
+        switch (window.location.pathname) {
+            case "/":
+                home = <p className=' text-blue-700'>Home</p>
+                break;
+            case "/about":
+                about = <p className=' text-blue-500'>About</p>
+                break;
+            case "/contact":
+                contact = <p className=' text-blue-500'>Contact</p>
+                break;
+            case "/service":
+                service = <p className=' text-blue-500'>services</p>
+                break;
+        }
     }
     setCilentPath()
     return (

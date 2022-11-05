@@ -9,7 +9,7 @@ function VerifyEmail(){
     const navigate = useNavigate();
 
     const resendEmailToken = () =>{
-        resendEmail(location.data,(outputData) => {
+        resendEmail(location.state.data,(outputData) => {
             if(outputData != null){
                 console.log("email is sended")
             }else{
@@ -50,7 +50,7 @@ function VerifyEmail(){
                  account and verify your account, unless your want to abort the process </Typography>
                  <Box sx={{backgroundColor: '#fcfaf2', marginY: '5%', height: 120, marginX: '10%', display:'flex' ,justifyContent: 'center',
                 alignItems: 'center'}}>
-                 <Button onClick={resendEmail} variant="contained" sx={{margin:'auto'}}>Resend Email</Button>
+                 <Button onClick={resendEmailToken} variant="contained" sx={{margin:'auto'}}>Resend Email</Button>
                  </Box>
                  <Typography sx={{textAlign:'center', paddingX: '10%'}}>Thank you for intrust and using our service, see you later </Typography>
                  <Button onClick={() => {navigate("/")}} variant="contained" sx={{marginLeft: '68%', marginTop: '5%'}}>Back to home</Button>

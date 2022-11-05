@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react"
 import { Avatar } from '@mui/material';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Paper';
@@ -14,10 +15,14 @@ import PropTypes from 'prop-types';
 import * as React from 'react';
 import { _userList } from '../_mock/_user';
 import Iconify from './Iconify';
+import { getAllUserInfo } from "../Api/userManager";
+import { color } from "@mui/system";
 
-const rows = _userList;
+//const rows = _userList;
+//console.log(rows)
 
 function descendingComparator(a, b, orderBy) {
+
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -85,6 +90,12 @@ const headCells = [
     disablePadding: false,
     label: 'Address',
   },
+  {
+    id: 'Verified',
+    numeric: false,
+    disablePadding: false,
+    label: 'Verified',
+  },
 ];
 
 function EnhancedTableHead(props) {
@@ -134,6 +145,15 @@ export default function UserTable({ onRowClick }) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const [rows, setRows] = useState([])
+  useEffect(() => {
+    getAllUserInfo((outputrows) => {
+      setRows(outputrows)
+      console.log(outputrows)
+      console.log("rows", rows)
+    })
+  }, [])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -202,22 +222,14 @@ export default function UserTable({ onRowClick }) {
                         </Box>
                       </TableCell>
                       {/* data in hear */}
-                      <TableCell>{row.email}</TableCell>
-                      <TableCell>{row.age}</TableCell>
-                      <TableCell>{row.birthday}</TableCell>
-                      <TableCell>{row.phoneNumber}</TableCell>
-                      <TableCell>{row.address}</TableCell>
-                      <TableCell align="center">
-                        {row.isVerified && (
-                          <Iconify
-                            icon="akar-icons:check"
-                            sx={{ color: 'success.main' }}
-                          />
-                        )}
-                        {!row.isVerified && (
-                          <Iconify icon="clarity:window-close-line" />
-                        )}
-                      </TableCell>
+                      <TableCell>{row.email ? row.email : "undifine"}</TableCell>
+                      <TableCell>{row.age ? row.age : "undifine"}</TableCell>
+                      <TableCell>{row.birthday ? row.birthday : "undifine"}</TableCell>
+                      <TableCell>{row.phoneNumber ? row.phoneNumber : "undifine"}</TableCell>
+                      <TableCell>{row.address ? row.address : "undifine"}</TableCell>
+                      <TableCell align="center" className="flex justify-center items-center">
+                        {row.verified ? <span style={{color:"green"}}>Checked</span> : <span className="text-red-700">Unchecked</span>}
+                      </TableCell> 
                     </TableRow>
                   );
                 })}

@@ -1,5 +1,7 @@
 import { tokenModel } from "../model/token.js";
 import { userInfoModel } from "../model/userInfoModel.js";
+import {sendEmail} from "../Util/sendEmail.js"
+import crypto from "crypto"
 
 // get all  token data medthod 
 export const getMethod = async (req,res) =>{
