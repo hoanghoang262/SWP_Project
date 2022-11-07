@@ -39,7 +39,7 @@ const schema = new mongoose.Schema({
         type:Boolean,
         default:false
     },avata:{
-        type:String
+        type:Buffer
     }
 },{timestamps: true})
 

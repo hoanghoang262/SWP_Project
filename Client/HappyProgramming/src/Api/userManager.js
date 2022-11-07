@@ -17,7 +17,11 @@ export const getAllUserInfo = async (callback) => {
 //setup user avata
 export const setUserAvata = async (data , callback) =>{
     console.log(data)
-    await axios.post(`${url}/uploadImage/`,data)
+    await axios.post(`${url}/uploadImage/`,data,{
+        headers:{
+            'Content-Type': 'multipart/form-data'
+        }
+    })
         .then(res => {
             callback(res.data)
             return res.data

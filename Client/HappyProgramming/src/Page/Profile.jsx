@@ -4,20 +4,28 @@ import { findAccByEmai } from '../Api/Authentication';
 import UserProfileForm from '../Component/UserProfileForm';
 import { constSelector, useRecoilState } from 'recoil';
 import { userInfoState } from '../Recoil/Atom';
-import {setUserAvata} from "../Api/userManager.js"
-
+import { setUserAvata } from "../Api/userManager.js"
 export default function Profile() {
   const [save, setSave] = useState(false);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const childFunc = useRef(null)
-  const [avata,setAvata] = useState()
+  const [avata, setAvata] = useState()
 
   const showChangeAvataInput = () => {
 
   }
+  const selectAvata = (e) => {
+    setAvata(e.target.files[0])
+  }
 
-  const selectAvata = (e) =>{
-    console.log(e.target.files[0])
+  const changeAvata = () => {
+    const data = {
+      _id: userInfo._id,
+      image: avata
+    }
+    setUserAvata(data, (res) => {
+      console.log(res)
+    })
   }
 
   //set save button state
@@ -32,13 +40,11 @@ export default function Profile() {
     childFunc.update();
   }
 
-
-  let avataSrc = "../../../../Server/Avata" + userInfo.avata
   const loadAvataForm =
-    <div className="flex justify-center ml-20"> 
+    <div className="flex justify-center ml-20">
       <div className="mb-3 w-96">
         <label htmlFor="formFile" className="form-label inline-block mb-2 text-gray-700">Change avata</label>
-        <input onChange={(e) =>selectAvata(e)} className="form-control
+        <input onChange={(e) => selectAvata(e)} className="form-control
                 block
                 w-full
                 px-3
