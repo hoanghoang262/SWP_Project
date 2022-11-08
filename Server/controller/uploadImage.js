@@ -13,7 +13,6 @@ export const uploadSingle = async (req, res, next) => {
         if (error) {
           console.log("error")
         }
-        console.log("doc : ", doc)
         console.log("image are saved")
         res.status(200).json();
       }).clone();

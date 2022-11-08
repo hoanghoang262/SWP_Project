@@ -1,5 +1,6 @@
 import { Switch, Container, FormControlLabel, Stack } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { getUserInfoById } from '../Api/userManager.js';
 import HeaderBreadcrumbs from '../Component/HeaderBreadcrumbs';
 import { UserContext } from '../context/UserContext';
 import AccountTabs from '../sections/user/AccountTabs';
@@ -7,7 +8,8 @@ import { _userList } from '../_mock/_user';
 
 export default function UserDetail() {
   const { id = '' } = useParams();
-  const _user = _userList.find((user) => user.id === id);
+  console.log("id",id)
+  const _user = getUserInfoById(id)
   return (
     <UserContext.Provider value={_user}>
       <Container maxWidth="lg" sx={{ mt: 5 }}>

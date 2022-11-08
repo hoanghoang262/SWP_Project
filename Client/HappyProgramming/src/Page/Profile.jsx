@@ -5,14 +5,16 @@ import UserProfileForm from '../Component/UserProfileForm';
 import { constSelector, useRecoilState } from 'recoil';
 import { userInfoState } from '../Recoil/Atom';
 import { setUserAvata } from "../Api/userManager.js"
+import convertBufferToImg from '../Util/convertBufferToImg';
 export default function Profile() {
   const [save, setSave] = useState(false);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const childFunc = useRef(null)
+  const [showChangeAvata,setShowChangeAvata] = useState(false) 
   const [avata, setAvata] = useState()
 
   const showChangeAvataInput = () => {
-
+    setShowChangeAvata(!showChangeAvata)
   }
   const selectAvata = (e) => {
     setAvata(e.target.files[0])
@@ -76,9 +78,9 @@ export default function Profile() {
             >
               <img className='cursor-pointer' onClick={showChangeAvataInput}
                 width={'100px'}
-                src={!userInfo.avata ? 'https://static.vecteezy.com/system/resources/previews/002/002/403/large_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg' : avataSrc}
+                src={!userInfo.avata ? 'https://static.vecteezy.com/system/resources/previews/002/002/403/large_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg' : convertBufferToImg(userInfo.avata)}
               />
-              {loadAvataForm}
+              {showChangeAvata ? loadAvataForm : null}
             </Box>
             <UserProfileForm checkSave={checkSave} childFunc={childFunc} />
             <div>

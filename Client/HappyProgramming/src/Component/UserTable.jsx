@@ -207,7 +207,7 @@ export default function UserTable({ onRowClick }) {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.id)}
+                      onClick={(event) => handleClick(event, row._id)}
                       role="checkbox"
                       tabIndex={-1}
                       key={row.name}

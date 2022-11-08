@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useRecoilState } from 'recoil';
 import { userInfoState } from '../Recoil/Atom';
 import logo from "./favicon.ico"
+import {Buffer} from "buffer"
+import convertBufferToImg from '../Util/convertBufferToImg';
 const Narbar = () => {
     //set up for dropdowm menu
     const [anchorEl, setAnchorEl] = useState(null);
@@ -28,13 +30,12 @@ const Narbar = () => {
 
 
     //create state and jsx element
+    const [userInfo, setUserInfo] = useRecoilState(userInfoState);
+    //chuyen doi avata tu buffer to img
     let avataSrc = null;
     if (userInfo.avata) {
-        let base64String = String.fromCharCode(...new Uint8Array((userInfo.avata.data)))
-        avataSrc = `data:image/png;base64,${base64String}`
+        avataSrc = convertBufferToImg(userInfo.avata)
     }
-    const [userInfo, setUserInfo] = useRecoilState(userInfoState);
-    console.log("avatapath", avataSrc)
     const naviga = useNavigate()
     const signInButton = <button onClick={() => naviga("/signIn")} type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Get started</button>
     const avata =

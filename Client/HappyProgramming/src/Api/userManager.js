@@ -14,6 +14,18 @@ export const getAllUserInfo = async (callback) => {
         })
 }
 
+//get userinfo by ID
+export const getUserInfoById = async (callback) => {
+    await axios.get(`${url}/user_manager/:id`)
+        .then(res => {
+            callback(res.data)
+            return res.data
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
 //setup user avata
 export const setUserAvata = async (data , callback) =>{
     console.log(data)

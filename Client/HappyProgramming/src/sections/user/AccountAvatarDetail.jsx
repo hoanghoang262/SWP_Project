@@ -11,13 +11,16 @@ import { pascalCase } from 'change-case';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import Iconify from '../../Component/Iconify';
+import { userInfoState } from '../../Recoil/Atom';
+import { useRecoilState } from 'recoil';
+import convertBufferToImg from '../../Util/convertBufferToImg';
 
 export default function AccountAvatarDetail({ isNew }) {
-  const _user = useContext(UserContext);
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   return (
     <Card elevation={6} sx={{ p: 5 }}>
       <Stack spacing={2} justifyContent="center" alignItems="center">
-        <Avatar src={_user.avatarUrl} sx={{ width: 100, height: 100 }} />
+        <Avatar src={convertBufferToImg(userInfo.avata)} sx={{ width: 100, height: 100 }} />
         {isNew && (
           <Typography variant="caption" sx={{ textAlign: 'center' }}>
             Allowed *.jpeg, *.jpg, *.png, *.gif max size of 3.1 MB
@@ -26,7 +29,7 @@ export default function AccountAvatarDetail({ isNew }) {
         {!isNew && (
           <Box>
             <Typography variant="subtitle2" sx={{ textAlign: 'center' }}>
-              {_user.role
+              {userInfo.role
                 .split(' ')
                 .map((word) => pascalCase(word))
                 .join(' ')}
@@ -36,7 +39,7 @@ export default function AccountAvatarDetail({ isNew }) {
               fontWeight={600}
               sx={{ textAlign: 'center' }}
             >
-              {_user.name}
+              {userInfo.firstName + " " + userInfo.lastName}
             </Typography>
           </Box>
         )}
@@ -47,13 +50,13 @@ export default function AccountAvatarDetail({ isNew }) {
             labelPlacement="start"
             control={
               <>
-                {_user.isVerified && (
+                {userInfo.verified && (
                   <Iconify
                     icon="akar-icons:check"
                     sx={{ color: 'success.main' }}
                   />
                 )}
-                {!_user.isVerified && (
+                {!userInfo.verified  && (
                   <Iconify icon="clarity:window-close-line" />
                 )}
               </>
