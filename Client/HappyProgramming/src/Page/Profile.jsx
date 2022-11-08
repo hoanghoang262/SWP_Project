@@ -26,7 +26,9 @@ export default function Profile() {
       image: avata
     }
     setUserAvata(data, (res) => {
-      console.log(res)
+      findAccByEmai({email:userInfo.email},(res) => {
+        setUserInfo(res)
+      })
     })
   }
 

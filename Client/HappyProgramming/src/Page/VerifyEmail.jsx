@@ -45,7 +45,7 @@ function VerifyEmail(){
                 justifyContent: 'center',
                 alignItems: 'center'
              }}>
-                <Typography variant='h3' sx={{fontWeight: 600, margin: 'auto',textAlign: 'center',padding:'4%'}}>Hi,{location.state.data.firstName + location.state.data.lastName}</Typography>
+                <Typography variant='h3' sx={{fontWeight: 600, margin: 'auto',textAlign: 'center',padding:'4%'}}>Hi,{location.state.name}</Typography>
                 <Typography sx={{textAlign:'center', paddingX: '10%'}}>We have received your request and we are modeling your account, please log in your email
                  account and verify your account, unless your want to abort the process </Typography>
                  <Box sx={{backgroundColor: '#fcfaf2', marginY: '5%', height: 120, marginX: '10%', display:'flex' ,justifyContent: 'center',

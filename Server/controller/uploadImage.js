@@ -2,7 +2,6 @@ import { userInfoModel } from "../model/userInfoModel.js";
 import fs from "fs"
 
 export const uploadSingle = async (req, res, next) => {
-  console.log("file",req.file.filename)
   if (!req.file) {
     console.log("No file received");
     res.status(500).json({mes:"file is empty"});

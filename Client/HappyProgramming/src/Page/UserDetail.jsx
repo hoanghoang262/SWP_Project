@@ -1,4 +1,5 @@
 import { Switch, Container, FormControlLabel, Stack } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getUserInfoById } from '../Api/userManager.js';
 import HeaderBreadcrumbs from '../Component/HeaderBreadcrumbs';
@@ -8,24 +9,34 @@ import { _userList } from '../_mock/_user';
 
 export default function UserDetail() {
   const { id = '' } = useParams();
-  console.log("id",id)
-  const _user = getUserInfoById(id)
-  return (
-    <UserContext.Provider value={_user}>
-      <Container maxWidth="lg" sx={{ mt: 5 }}>
-        <Stack>
-          <HeaderBreadcrumbs
-            heading={_user.name}
-            links={[
-              { name: 'Dashboard', href: '/' },
-              { name: 'User', href: '/admin/user' },
-              { name: _user.name },
-            ]}
-            action={<FormControlLabel label="Edit" labelPlacement="start" control={<Switch />} />}
-          />
-          <AccountTabs />
-        </Stack>
-      </Container>
-    </UserContext.Provider>
-  );
+  const [userData,setUserData] = useState(null)
+  useEffect(()=>{
+    getUserInfoById(id,(res)=>{
+      setUserData(res)
+    })
+  },[])
+  if(userData){
+    return (
+      <UserContext.Provider value={userData}>
+        <Container maxWidth="lg" sx={{ mt: 5 }}>
+          <Stack>
+            <HeaderBreadcrumbs
+              heading={userData.firstName}
+              links={[
+                { name: 'Dashboard', href: '/' },
+                { name: 'User', href: '/admin/user' },
+                { name: userData.firstName },
+              ]}
+              action={<FormControlLabel label="Edit" labelPlacement="start" control={<Switch />} />}
+            />
+            <AccountTabs />
+          </Stack>
+        </Container>
+      </UserContext.Provider>
+    );
+  }else{
+    return(
+      <h1>Loading</h1>
+    )
+  }
 }

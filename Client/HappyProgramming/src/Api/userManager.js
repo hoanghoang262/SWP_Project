@@ -15,8 +15,8 @@ export const getAllUserInfo = async (callback) => {
 }
 
 //get userinfo by ID
-export const getUserInfoById = async (callback) => {
-    await axios.get(`${url}/user_manager/:id`)
+export const getUserInfoById = async (id,callback) => {
+    await axios.get(`${url}/user_manager/${id}`)
         .then(res => {
             callback(res.data)
             return res.data
