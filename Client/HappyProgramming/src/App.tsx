@@ -17,8 +17,15 @@ import CourseExplore from './Page/CourseExplore'
 import UserLayout from './layout/UserLayout'
 import CoursePage from './Page/CoursePage'
 import AdminLayout from './layout/AdminLayout'
+<<<<<<< HEAD
 import CreatedCourse from './Page/CreatedCourse'
+=======
+import { userInfoState } from './Recoil/Atom'
+import { useRecoilState } from 'recoil'
+import { findAccByEmai } from './Api/Authentication'
+>>>>>>> af6230458dd78b26d16a594ee187430605a793cd
 function App() {
+  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   return (
     <BrowserRouter>
       <Routes>

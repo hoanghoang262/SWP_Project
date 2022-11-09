@@ -57,6 +57,8 @@ export default function SignIn() {
             setAlarmMessage(null)
         },3000)
           findAccByEmai({email:email},(outputData) =>{
+            document.cookie = "email=" + email
+            console.log("cookie",document.cookie)
             navigate("/verifyEmail", {
               state: {
                 data:outputData,

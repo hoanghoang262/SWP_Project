@@ -17,6 +17,18 @@ export const getMethod = async (req,res) =>{
     }
 }
 
+// get userinfo by ID
+export const getUserInfoById = async(req,res) =>{
+    try{
+        const userInfos = await userInfoModel.findById(req.params.id);
+        console.log("useInfo by id :" , userInfos);
+        res.status(200).json(userInfos);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error : err})
+    }
+}
+
 //create user info data doc method 
 export const postMethod = async (req,res) =>{
     try{

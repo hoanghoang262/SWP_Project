@@ -37,9 +37,9 @@ const schema = new mongoose.Schema({
     },
     verified:{
         type:Boolean,
-        default:false
+        default:true //for test
     },avata:{
-        type:String
+        type:Buffer
     }
 },{timestamps: true})
 

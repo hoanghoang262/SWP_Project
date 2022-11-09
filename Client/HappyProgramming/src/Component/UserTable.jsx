@@ -17,6 +17,7 @@ import { _userList } from '../_mock/_user';
 import Iconify from './Iconify';
 import { getAllUserInfo } from "../Api/userManager";
 import { color } from "@mui/system";
+import convertBufferToImg from "../Util/convertBufferToImg";
 
 //const rows = _userList;
 //console.log(rows)
@@ -182,83 +183,87 @@ export default function UserTable({ onRowClick }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
-  return (
-    <Box sx={{ width: '100%' }}>
-      <Card variant="outlined" sx={{ width: '100%', mb: 2 }}>
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 1000, width: '100%' }}
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`;
-
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row.id)}
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.name}
-                      sx={{ cursor: 'pointer' }}
-                    >
-                      <TableCell component="th" id={labelId} scope="row">
-                        <Box
-                          sx={{ alignItems: 'center', gap: 1, display: 'flex' }}
-                        >
-                          <Avatar src={row.avatarUrl} />
-                          {row.name}
-                        </Box>
-                      </TableCell>
-                      {/* data in hear */}
-                      <TableCell>{row.email ? row.email : "undifine"}</TableCell>
-                      <TableCell>{row.age ? row.age : "undifine"}</TableCell>
-                      <TableCell>{row.birthday ? row.birthday : "undifine"}</TableCell>
-                      <TableCell>{row.phoneNumber ? row.phoneNumber : "undifine"}</TableCell>
-                      <TableCell>{row.address ? row.address : "undifine"}</TableCell>
-                      <TableCell align="center" className="flex justify-center items-center">
-                        {row.verified ? <span style={{color:"green"}}>Checked</span> : <span className="text-red-700">Unchecked</span>}
-                      </TableCell> 
-                    </TableRow>
-                  );
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Card>
-      {/* <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      /> */}
-    </Box>
-  );
+  if(rows){
+    return (
+      <Box sx={{ width: '100%' }}>
+        <Card variant="outlined" sx={{ width: '100%', mb: 2 }}>
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 1000, width: '100%' }}
+              size={dense ? 'small' : 'medium'}
+            >
+              <EnhancedTableHead
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {/* if you don't need to support IE11, you can replace the `stableSort` call with:
+                   rows.slice().sort(getComparator(order, orderBy)) */}
+                {stableSort(rows, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`;
+  
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row._id)}
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.name}
+                        sx={{ cursor: 'pointer' }}
+                      >
+                        <TableCell component="th" id={labelId} scope="row">
+                          <Box
+                            sx={{ alignItems: 'center', gap: 1, display: 'flex' }}
+                          >
+                            <Avatar src={row.avata ? convertBufferToImg(row.avata) : null} />
+                            {row.lastName}
+                          </Box>
+                        </TableCell>
+                        {/* data in hear */}
+                        <TableCell>{row.email ? row.email : "undifine"}</TableCell>
+                        <TableCell>{row.age ? row.age : "undifine"}</TableCell>
+                        <TableCell>{row.birthday ? row.birthday : "undifine"}</TableCell>
+                        <TableCell>{row.phoneNumber ? row.phoneNumber : "undifine"}</TableCell>
+                        <TableCell>{row.address ? row.address : "undifine"}</TableCell>
+                        <TableCell align="center" className="flex justify-center items-center">
+                          {row.verified ? <span style={{color:"green"}}>Checked</span> : <span className="text-red-700">Unchecked</span>}
+                        </TableCell> 
+                      </TableRow>
+                    );
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Card>
+        {/* <FormControlLabel
+          control={<Switch checked={dense} onChange={handleChangeDense} />}
+          label="Dense padding"
+        /> */}
+      </Box>
+    );
+  }else{
+    <h1>Loading</h1>
+  }
 }

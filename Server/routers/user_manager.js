@@ -1,11 +1,12 @@
 //navidate crud method for management user  
 
 import express from "express";
-import {deleteAllMethod, deleteMethod, findAccByEmail, getMethod,postMethod,updateMethod} from '../controller/user_manager.js'
+import {deleteAllMethod, deleteMethod, findAccByEmail, getMethod,getUserInfoById,postMethod,updateMethod} from '../controller/user_manager.js'
 
 const router = express.Router();
 
 router.get('/',getMethod);   //read method 
+router.get('/:id',getUserInfoById);   //get userInfo by id method 
 router.post('/',postMethod); //create method
 router.post("/update",updateMethod);//update method
 router.get("/update",(req,res) => {res.status(200).json("Update user info")});//get update method

@@ -5,11 +5,11 @@ import path from "path"
 
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, 'Avata');
+        callback(null, './Avata');
     },
     filename: function (req, file, callback) {
         console.log(file)
-        callback(null,Date.now() + path.extname(file.originalname))
+        callback(null,file.originalname)
     }
 });
 
