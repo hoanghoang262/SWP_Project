@@ -17,6 +17,7 @@ import CourseExplore from './Page/CourseExplore'
 import UserLayout from './layout/UserLayout'
 import CoursePage from './Page/CoursePage'
 import AdminLayout from './layout/AdminLayout'
+import CreatedCourse from './Page/CreatedCourse'
 function App() {
   return (
     <BrowserRouter>
@@ -58,6 +59,7 @@ function App() {
           <Route path="list" element={<CourseExplore />} />
           <Route path=":id" element={<CoursePage />} />
         </Route>
+        <Route path="/admin/course/createdCourse" element={<><Narbar /><CreatedCourse/></>}></Route>
       </Routes>
     </BrowserRouter>
   )
