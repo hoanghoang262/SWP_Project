@@ -7,7 +7,7 @@ export default function Logo({ sx, ...rest }) {
   return (
     <Link
       component={RouterLink}
-      to={isAdmin ? '/admin' : '/'}
+      to={'/'}
       variant="h2"
       sx={{
         textDecoration: 'none',
