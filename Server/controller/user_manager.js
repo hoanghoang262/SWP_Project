@@ -4,6 +4,7 @@ import { userInfoModel } from "../model/userInfoModel.js"
 import {tokenModel} from "../model/token.js"
 import {sendEmail} from "../Util/sendEmail.js"
 import crypto from "crypto"
+import { courseModel } from "../model/courseModel.js"
 
 // get all user data medthod 
 export const getMethod = async (req,res) =>{
@@ -72,6 +73,41 @@ export const updateMethod = async (req,res) =>{
     }
 } 
 
+//ban user
+export const banUser = async (req,res) =>{
+    try{
+        const updateData = req.body;
+        await userInfoModel.findByIdAndUpdate(updateData._id,{ban : true},{new: true},(error,doc) => {
+            if(error){
+                console.log("error")
+            }
+            console.log("doc : " , doc)
+            res.status(200).json();
+        }).clone(); 
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error : err});
+    }
+} 
+
+//set user to admin
+export const setUserToAdmin = async (req,res) =>{
+    try{
+        const updateData = req.body;
+        await userInfoModel.findByIdAndUpdate(updateData._id,{role : "admin"},{new: true},(error,doc) => {
+            if(error){
+                console.log("error")
+            }
+            console.log("doc : " , doc)
+            res.status(200).json();
+        }).clone(); 
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error : err});
+    }
+} 
+
+
 //delete userinfo method
 export const deleteMethod = async (req,res) => {
     try{
@@ -112,3 +148,31 @@ export const findAccByEmail = async (req,res) =>{
         res.status(500).json({error : err});
     }
 }
+
+//enroll a course  {nhan vao userID vad courseID}
+export const enroll = async (req,res) =>{
+    try{
+        const data = req.body; //read data client send in body
+        const courseData = await courseModel.findOne({_id: data.courseId}) //find course info by id
+        const userData = await userInfoModel.findOne({_id: data.userId})  //find user info by id
+        //add course to user info course list
+        await userInfoModel.findByIdAndUpdate(data.userId,{courseEnrolled:{...data.courseEnrolled,courseData}},{new: true},(error,doc) => {
+            if(error){
+                console.log("error")
+            }
+            console.log("doc : " , doc)
+            res.status(200).json();
+        }).clone(); 
+        //add user to member list of a course
+        await courseModel.findByIdAndUpdate(data.courseId,{memberList:{...courseData.memberList,userData}},{new: true},(error,doc) => {
+            if(error){
+                console.log("error")
+            }
+            console.log("doc : " , doc)
+            res.status(200).json();
+        }).clone();  
+    }catch(err){
+
+    }
+}
+

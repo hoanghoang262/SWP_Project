@@ -25,7 +25,7 @@ export const verifyToken = async (req,res) => {
             token:req.params.token
         })
         if(!token) return res.status(400).send({message:"Invalid link"})
-        await userInfoModel.updateOne({_id: user._id,verified:true})
+        await userInfoModel.findByIdAndUpdate(user._id,{verified:true})
         await token.remove()
         res.redirect('http://localhost:3000');
     }catch(err){

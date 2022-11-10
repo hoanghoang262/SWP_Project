@@ -24,6 +24,9 @@ const schema = new mongoose.Schema({
     },address:{
         type: String
     },
+    courseEnrolled:{
+        type:Array
+    },
     password:{
         type: String
     },
@@ -37,7 +40,7 @@ const schema = new mongoose.Schema({
     },
     verified:{
         type:Boolean,
-        default:true //for test
+        default:false //for test
     },avata:{
         type:Buffer
     }

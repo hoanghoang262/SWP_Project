@@ -10,4 +10,5 @@ router.post("/update",updateCourse)
 router.post("/delete",deleteCourse)
 router.post("/deleteAll",deleteAllCourse)
 
+
 export default router

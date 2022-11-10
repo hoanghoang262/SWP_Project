@@ -13,6 +13,10 @@ const schema = new mongoose.Schema({
         type: String,
         require: true,
     },
+    memberList:{
+        type:Array,
+        default:[]
+    },
     price:{
         type:Number,
         default: 0

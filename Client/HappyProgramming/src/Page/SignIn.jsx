@@ -40,28 +40,26 @@ export default function SignIn() {
       if (inputData == null || inputData.email == null || inputData == []) {
         console.log("Sign in deline");
         setAlarmMessage(<Alert id='alert' sx={{ position: 'absolute', width: '15%' }} style={{ bottom: 50, right: 0 }} severity='warning'>Sign in deline</Alert>)
-        setTimeout(()=>{
+        setTimeout(() => {
           setAlarmMessage(null)
-      },3000)
+        }, 3000)
       } else {
         if (inputData.ban == true) {
           console.log("This acc is baned")
           setAlarmMessage(<Alert id='alert' sx={{ position: 'absolute', width: '15%' }} style={{ bottom: 50, right: 0 }} severity='warning'>You have been banned</Alert>)
-          setTimeout(()=>{
-              setAlarmMessage(null)
-          },3000)
+          setTimeout(() => {
+            setAlarmMessage(null)
+          }, 3000)
         } else if (inputData.verified == false) {
           console.log("This acc didnt verify")
           setAlarmMessage(<Alert id='alert' sx={{ position: 'absolute', width: '15%' }} style={{ bottom: 50, right: 0 }} severity='warning'>You havent verify</Alert>)
-          setTimeout(()=>{
+          setTimeout(() => {
             setAlarmMessage(null)
-        },3000)
-          findAccByEmai({email:email},(outputData) =>{
-            document.cookie = "email=" + email
-            console.log("cookie",document.cookie)
+          }, 3000)
+          findAccByEmai({ email: email }, (outputData) => {
             navigate("/verifyEmail", {
               state: {
-                data:outputData,
+                data: outputData,
                 email: email
               }
             })

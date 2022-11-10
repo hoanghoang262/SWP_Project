@@ -9,6 +9,7 @@ import Contact from './Page/Contact'
 import Profile from './Page/Profile'
 import Narbar from './Component/Narbar'
 import VerifyEmail from './Page/VerifyEmail'
+import CreateCourse from './Page/createCourse'
 import UserList from './Page/UserList'
 import UserDetail from './Page/UserDetail'
 import CourseList from './Page/CourseList'
@@ -17,11 +18,7 @@ import CourseExplore from './Page/CourseExplore'
 import UserLayout from './layout/UserLayout'
 import CoursePage from './Page/CoursePage'
 import AdminLayout from './layout/AdminLayout'
-import { userInfoState } from './Recoil/Atom'
-import { useRecoilState } from 'recoil'
-import { findAccByEmai } from './Api/Authentication'
 function App() {
-  const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   return (
     <BrowserRouter>
       <Routes>
@@ -35,6 +32,7 @@ function App() {
         <Route path='/coursePage' /> {/* page show up list of course */}
         <Route path='/service' element={<><Narbar /></>} />{/*service*/}
         <Route path='/verifyEmail' element={<VerifyEmail />} />{/*access when user didnt verify email*/}
+        <Route path='/createCourse' element={<CreateCourse/>} />{/*access when user didnt verify email*/}
         <Route path="/admin" element={<AdminLayout />}>
           <Route
             index
