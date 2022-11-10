@@ -8,6 +8,9 @@ const schema = new mongoose.Schema({
         ref: "UserInfos",
         unique:true
     },
+    thumbnail:{
+        type: Buffer
+    },
     //title or name of course
     name:{
         type: String,
@@ -33,6 +36,9 @@ const schema = new mongoose.Schema({
         type: String,
         default:"none"
     },
+    rating:{
+        type:Number
+    }
 })
 
 export const courseModel = mongoose.model('Course', schema);

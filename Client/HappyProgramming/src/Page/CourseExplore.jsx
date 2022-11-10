@@ -6,8 +6,9 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { getAllCourseInfo } from '../Api/courseManager';
 import HeaderBreadcrumbs from '../Component/HeaderBreadcrumbs';
 import Iconify from '../Component/Iconify';
 import LayoutSwitch from '../Component/LayoutSwitch';
@@ -17,7 +18,14 @@ import CourseListListCard from '../sections/course/CourseListListCard';
 import { _courseList } from '../_mock/_course';
 
 export default function CourseExplore() {
-  const courses = _courseList;
+  //load course data
+  const [courses, setCourses] = useState([])
+  useEffect(() => {
+    getAllCourseInfo((outputrows) => {
+      setCourses(outputrows)
+      console.log(outputrows)
+    })
+  }, [])
 
   const [layout, setLayout] = useState('list');
 
