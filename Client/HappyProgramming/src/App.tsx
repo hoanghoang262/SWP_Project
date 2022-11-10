@@ -18,16 +18,10 @@ import CourseExplore from './Page/CourseExplore'
 import UserLayout from './layout/UserLayout'
 import CoursePage from './Page/CoursePage'
 import AdminLayout from './layout/AdminLayout'
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-import CreatedCourse from './Page/CreatedCourse'
-=======
+import CreatedCourse from './Page/createCourse'
 import { userInfoState } from './Recoil/Atom'
 import { useRecoilState } from 'recoil'
 import { findAccByEmai } from './Api/Authentication'
->>>>>>> af6230458dd78b26d16a594ee187430605a793cd
->>>>>>> 98945ff66c358fd6ac0a22918f454bac01ed9475
 function App() {
   return (
     <BrowserRouter>
